@@ -11,6 +11,7 @@ from utils.fecha import *
 import xlwings as xw
 from xlwings import *
 from utils.validaciones import *
+from utils.cartera import diligenciarCarteras
 
 root = Tk()
 root.withdraw()
@@ -41,7 +42,7 @@ rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
 def escribirEnElPlano():
     wb = xw.Book(rutaRobot + '/planoirl-liberado.xlsm')
     ws = wb.sheets['Recaudo de Aportes']
-    ws.range('J8').value = 'ESCRIBIENDO CON PYTHON'
+    ws.range('J8:J15').value = 'ESCRIBIENDO CON PYTHON'
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
     messagebox.showinfo("RobotIRL", "Se ha escrito en el planoirl.xlsm")
     wb.close()
@@ -60,7 +61,12 @@ def main():
     clasificarArchivos()
     validarArchivos(primeraVez, fecha)
 
+    # Abrir el plano
+    wb = xw.Book(rutaRobot + '/planoirl-liberado.xlsm')
+    #escribirEnElPlano()
+
     #To do: Diligenciar carteras
+    diligenciarCarteras(wb, fecha)
 
     messagebox.showinfo("RobotIRL", "Termine")
 
