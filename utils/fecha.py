@@ -13,7 +13,7 @@ class Fecha:
         self.anio = anio
 
     def as_String(self):
-        return f'{self.dia}/{self.mes}/{self.anio}'
+        return f'{self.anio}-{self.mes}-{self.dia}'
 
     def as_Text(self):
         return str(meses[self.mes - 1]) + ' ' + str(self.anio)

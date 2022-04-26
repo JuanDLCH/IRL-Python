@@ -36,11 +36,6 @@ def validarCarpetas():
             os.mkdir(rutaRobot + '/' + 'Archivos' + '/' + i)
         os.mkdir(rutaRobot + '/' + 'PlanosDiligenciados')
         os.mkdir(rutaRobot + '/' + 'ArchivosNuevos')
-        # Crear xlsx vacio
-        import xlsxwriter
-        workbook = xlsxwriter.Workbook(rutaRobot + '/Desviacion-estandar.xlsx')
-        workbook.add_worksheet('Desviacion-estandar')
-        workbook.close()
 
         # Abrir el explorador de archivos en la carpeta del robot
         os.system('explorer ' + rutaRobot + '\ArchivosNuevos')

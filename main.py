@@ -1,17 +1,17 @@
 from ctypes import wstring_at
 import os
-import string
 from tkinter import *
 from tkinter import messagebox
 import datetime
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from itsdangerous import want_bytes
+from utils.desviacionEstandar import descargarArchivo
 from utils.fecha import *
 import xlwings as xw
 from xlwings import *
 from utils.validaciones import *
-from utils.cartera import diligenciarCarteras
+from hojas.cartera import diligenciarCarteras
 
 root = Tk()
 root.withdraw()
@@ -40,7 +40,7 @@ rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
 
 # Ejemplo para escribir en el excel
 def escribirEnElPlano():
-    wb = xw.Book(rutaRobot + '/planoirl-liberado.xlsm')
+    wb = xw.Book(rutaRobot + '/planoirl.xlsm')
     ws = wb.sheets['Recaudo de Aportes']
     ws.range('J8:J15').value = 'ESCRIBIENDO CON PYTHON'
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
@@ -50,7 +50,10 @@ def escribirEnElPlano():
 
 
 def main():
-
+    descargarArchivo()
+    messagebox.showerror("RobotIRL", "Se ha descargado el archivo")
+    # Iniciar un cronometro
+    start_time = datetime.now()    
     mes = 'Junio'
     anio = 2021
     primeraVez = True
@@ -62,11 +65,17 @@ def main():
     validarArchivos(primeraVez, fecha)
 
     # Abrir el plano
-    wb = xw.Book(rutaRobot + '/planoirl-liberado.xlsm')
+    wb = xw.Book(rutaRobot + '/planoirl.xlsm')
     #escribirEnElPlano()
 
     #To do: Diligenciar carteras
     diligenciarCarteras(wb, fecha)
+
+    wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
+
+    # Terminar el cronometro
+    end_time = datetime.now()
+    print('Tiempo de ejecucion: {}'.format(end_time - start_time))
 
     messagebox.showinfo("RobotIRL", "Termine")
 
