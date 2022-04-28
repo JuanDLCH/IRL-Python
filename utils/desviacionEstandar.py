@@ -47,6 +47,7 @@ def desviacionEstandar(fecha: datetime):
     archivos = os.listdir(rutaRobot)
     # Determinar si existe un archivo cuyo nombre empieza por Desviacion-estandar
     existeArchivo = False
+    archivo = ''
     for i in archivos:
         if i.startswith('Desviacion-estandar'):
             archivo = i
@@ -64,7 +65,8 @@ def desviacionEstandar(fecha: datetime):
 
     # Si la fecha del archivo es menor a la fecha actual, descargar el archivo
     if fechaArchivoDate.as_datetime() < fecha:
-        os.remove(rutaRobot + '/' + archivo)
+        if existeArchivo:
+            os.remove(rutaRobot + '/' + archivo)
         found = False
         while not found:
             try:

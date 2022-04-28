@@ -24,8 +24,7 @@ def ipm(fecha: Fecha, primeraVez, desviacionEstandar, wb: xw.Book):
             archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
             archivo = os.path.join(rutaRobot + '/Archivos/INFORME INDIVIDUAL DE CARTERA DE CREDITO (MODIFICADO)', archivo)
 
-            tabla = pd.read_excel(archivo, sheet_name='SIAC',
-                          skiprows=3, usecols='C, Q')
+            tabla = pd.read_csv(archivo, usecols=['CodigoContable', 'SaldoCapital'])
 
             saldoTotal = tabla['SaldoCapital'].sum()
             codigosContables = [144110, 144210,141110, 141210, 144115, 144215, 141115, 141215, 144120, 144220,141120, 141220, 144125, 144225, 141125, 14122, 140410, 140415, 140420, 140425, 140510, 140515, 140520, 140525, 144810, 144815, 144820, 144825, 145410, 145415, 145420, 145425, 145510, 145515, 145520, 145525, 146110, 146115, 146120, 146125, 146210, 146215, 146220, 146225]

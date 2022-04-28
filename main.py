@@ -1,16 +1,14 @@
-from ctypes import wstring_at
 import os
 from tkinter import *
 from tkinter import messagebox
 import datetime
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
-from itsdangerous import want_bytes
 from hojas.ipm import ipm
 from utils.desviacionEstandar import desviacionEstandar
 from utils.fecha import *
 import xlwings as xw
 from xlwings import *
+from xlwings import App
 from utils.validaciones import *
 from hojas.cartera import diligenciarCarteras
 from hojas.ipm import ipm
@@ -42,18 +40,20 @@ rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
 
 # Ejemplo para escribir en el excel
 def escribirEnElPlano():
-    wb = xw.Book(rutaRobot + '/planoirl.xlsm')
+    app = xw.app(visible=False)
+    wb = app.books.open(rutaRobot + '/planoirl.xlsm')
+    #wb = xw.Book(rutaRobot + '/planoirl.xlsm')
     ws = wb.sheets['Recaudo de Aportes']
     ws.range('J8:J15').value = 'ESCRIBIENDO CON PYTHON'
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
     messagebox.showinfo("RobotIRL", "Se ha escrito en el planoirl.xlsm")
-    wb.close()
     
 
 
 def main():
     # Iniciar un cronometro
     start_time = datetime.now()    
+
     mes = 'Junio'
     anio = 2021
     primeraVez = True
@@ -67,6 +67,10 @@ def main():
 
     # Abrir el plano
     wb = xw.Book(rutaRobot + '/planoirl.xlsm')
+    planoInvisible = wb.macro('Visibility.makeInvisible') 
+    planoVisible = wb.macro('Visibility.makeVisible')
+
+    planoInvisible()
     #escribirEnElPlano()
 
     #To do: Diligenciar carteras
@@ -80,6 +84,8 @@ def main():
     print('Tiempo de ejecucion: {}'.format(end_time - start_time))
 
     messagebox.showinfo("RobotIRL", "Termine")
+
+    wb.close()
 
 
 main()
