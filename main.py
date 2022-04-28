@@ -1,8 +1,12 @@
+import imp
+from importlib.resources import path
 import os
 from tkinter import *
 from tkinter import messagebox
 import datetime
 from datetime import datetime
+
+from pandas import ExcelFile
 from hojas.ipm import ipm
 from utils.desviacionEstandar import desviacionEstandar
 from utils.fecha import *
@@ -12,6 +16,7 @@ from xlwings import App
 from utils.validaciones import *
 from hojas.cartera import diligenciarCarteras
 from hojas.ipm import ipm
+import sys
 
 root = Tk()
 root.withdraw()
@@ -31,12 +36,22 @@ carpetas = [
 ]
 
 archivosPrimeraVez = [13, 1, 13, 25, 13, 25, 1, 1]
-
 archivosSegundaVez = [1 , 1, 1 , 2 , 1 , 2, 1, 1]
 
 # Obtener ruta de la carpeta documentos
 rutaDocumentos = os.path.join(os.path.expanduser('~'), 'Documents')
 rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 
 # Ejemplo para escribir en el excel
 def escribirEnElPlano():
@@ -52,7 +67,10 @@ def escribirEnElPlano():
 
 def main():
     # Iniciar un cronometro
-    start_time = datetime.now()    
+    start_time = datetime.now()  
+
+    path = resource_path('planoirl.xlsm')
+    plano = ExcelFile(path)
 
     mes = 'Junio'
     anio = 2021
@@ -66,7 +84,7 @@ def main():
     desviacion = desviacionEstandar(fecha.as_datetime())
 
     # Abrir el plano
-    wb = xw.Book(rutaRobot + '/planoirl.xlsm')
+    wb = xw.Book(plano)
     planoInvisible = wb.macro('Visibility.makeInvisible') 
     planoVisible = wb.macro('Visibility.makeVisible')
 
