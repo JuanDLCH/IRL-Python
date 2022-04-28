@@ -32,3 +32,11 @@ class Fecha:
     def add_years(self, years):
         fecha = self.as_datetime() + relativedelta(years=years)
         return Fecha(fecha.day, fecha.month, fecha.year)
+
+    def from_Text(self, text):
+        mes = meses.index(text.split()[0]) + 1
+        anio = int(text.split()[1])
+        return Fecha(1, mes, anio)
+    
+    def setDay(self, day):
+        self.dia = day

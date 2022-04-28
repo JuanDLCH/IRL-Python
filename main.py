@@ -6,12 +6,14 @@ import datetime
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from itsdangerous import want_bytes
-from utils.desviacionEstandar import descargarArchivo
+from hojas.ipm import ipm
+from utils.desviacionEstandar import desviacionEstandar
 from utils.fecha import *
 import xlwings as xw
 from xlwings import *
 from utils.validaciones import *
 from hojas.cartera import diligenciarCarteras
+from hojas.ipm import ipm
 
 root = Tk()
 root.withdraw()
@@ -50,8 +52,6 @@ def escribirEnElPlano():
 
 
 def main():
-    descargarArchivo()
-    messagebox.showerror("RobotIRL", "Se ha descargado el archivo")
     # Iniciar un cronometro
     start_time = datetime.now()    
     mes = 'Junio'
@@ -63,6 +63,7 @@ def main():
     validarCarpetas()
     clasificarArchivos()
     validarArchivos(primeraVez, fecha)
+    desviacion = desviacionEstandar(fecha.as_datetime())
 
     # Abrir el plano
     wb = xw.Book(rutaRobot + '/planoirl.xlsm')
@@ -70,6 +71,7 @@ def main():
 
     #To do: Diligenciar carteras
     diligenciarCarteras(wb, fecha)
+    ipm(fecha, primeraVez, desviacion, wb)
 
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
 

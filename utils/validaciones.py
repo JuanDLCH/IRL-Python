@@ -1,7 +1,12 @@
+from utils.convert2csv import convertiracsv
 from utils.fecha import *
 import os
 from tkinter import *
 from tkinter import messagebox
+from xlsx2csv import Xlsx2csv
+import pandas as pd
+from utils.convert2csv import convertiracsv
+
 root = Tk()
 root.withdraw()
 
@@ -51,6 +56,11 @@ def validarCarpetas():
 def clasificarArchivos():
     # Obtener archivos de la carpeta ArchivosNuevos
     archivos = os.listdir(rutaRobot + '/ArchivosNuevos')
+
+    if len(archivos) != 0:
+        convertiracsv()
+
+
     # Clasificar los archivos
     for i in carpetas:
         for j in archivos:

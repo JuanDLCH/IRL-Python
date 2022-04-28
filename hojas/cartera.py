@@ -33,8 +33,10 @@ rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
 def obtenerTabla(fecha: Fecha):
     columnas = ['CodigoContable', 'NroCredito', 'ValorPrestamo', 'SaldoCapital', 'FechaDesembolsoInicial', 'FechaVencimiento',
                 'TasaInteresEfectiva', 'AlturaCuota', 'ValorCuotaFija', 'Amortizacion']
-    archivo = rutaRobot + '/Archivos/' + carpeta + \
-        '/' + carpeta + ' ' + fecha.as_Text() + '.xlsx'
+
+    archivos = os.listdir(rutaRobot + '/Archivos/INFORME INDIVIDUAL DE CARTERA DE CREDITO (MODIFICADO)')
+    archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
+    archivo = os.path.join(rutaRobot + '/Archivos/INFORME INDIVIDUAL DE CARTERA DE CREDITO (MODIFICADO)', archivo)
 
     tabla = pd.read_excel(archivo, sheet_name='SIAC',
                           skiprows=3, usecols='C:AA')
@@ -55,7 +57,6 @@ def filtrarTabla(tabla, fecha: Fecha, hoja):
         codigosContables[hojas.index(hoja)])]
     _tabla.drop('CodigoContable', axis=1, inplace=True)
 
-    print(_tabla)
     return _tabla
 
 
