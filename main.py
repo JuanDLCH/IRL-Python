@@ -1,13 +1,10 @@
-import imp
-from importlib.resources import path
 import os
 from tkinter import *
 from tkinter import messagebox
 import datetime
 from datetime import datetime
-
 from pandas import ExcelFile
-from hojas.ipm import ipm
+from hojas.ipm import ipm, ipmpat
 from utils.desviacionEstandar import desviacionEstandar
 from utils.fecha import *
 import xlwings as xw
@@ -17,6 +14,7 @@ from utils.validaciones import *
 from hojas.cartera import diligenciarCarteras
 from hojas.ipm import ipm
 import sys
+from hojas.activosLiquidos import activosLiquidos
 
 root = Tk()
 root.withdraw()
@@ -51,17 +49,6 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
-
-
-# Ejemplo para escribir en el excel
-def escribirEnElPlano():
-    app = xw.app(visible=False)
-    wb = app.books.open(rutaRobot + '/planoirl.xlsm')
-    #wb = xw.Book(rutaRobot + '/planoirl.xlsm')
-    ws = wb.sheets['Recaudo de Aportes']
-    ws.range('J8:J15').value = 'ESCRIBIENDO CON PYTHON'
-    wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
-    messagebox.showinfo("RobotIRL", "Se ha escrito en el planoirl.xlsm")
     
 
 
@@ -84,26 +71,30 @@ def main():
     desviacion = desviacionEstandar(fecha.as_datetime())
 
     # Abrir el plano
+    print('Abriendo plano. . .')
     wb = xw.Book(plano)
+    print('Iniciando sesion. . .')
     planoInvisible = wb.macro('Visibility.makeInvisible') 
     planoVisible = wb.macro('Visibility.makeVisible')
 
-    planoInvisible()
-    #escribirEnElPlano()
+    #planoInvisible()
 
     #To do: Diligenciar carteras
     diligenciarCarteras(wb, fecha)
     ipm(fecha, primeraVez, desviacion, wb)
+    ipmpat(fecha, primeraVez, wb)
+    activosLiquidos(fecha, primeraVez, wb)
 
+    print('Guardando plano. . .')
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
 
     # Terminar el cronometro
     end_time = datetime.now()
     print('Tiempo de ejecucion: {}'.format(end_time - start_time))
 
-    messagebox.showinfo("RobotIRL", "Termine")
+    planoVisible()
 
-    wb.close()
+    messagebox.showinfo("RobotIRL", "Termine")
 
 
 main()

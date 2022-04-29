@@ -4,6 +4,7 @@ from utils.fecha import *
 import openpyxl
 import os
 import pandas as pd
+from utils.globals import rutaRobot
 
 hojas = [
     'R. cartera consumo Ventanilla',
@@ -25,18 +26,14 @@ codigosContables = [
 
 carpeta = 'INFORME INDIVIDUAL DE CARTERA DE CREDITO (MODIFICADO)'
 
-# Obtener ruta de la carpeta documentos
-rutaDocumentos = os.path.join(os.path.expanduser('~'), 'Documents')
-rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
-
 
 def obtenerTabla(fecha: Fecha):
     columnas = ['CodigoContable', 'NroCredito', 'ValorPrestamo', 'SaldoCapital', 'FechaDesembolsoInicial', 'FechaVencimiento',
                 'TasaInteresEfectiva', 'AlturaCuota', 'ValorCuotaFija', 'Amortizacion']
 
-    archivos = os.listdir(rutaRobot + '/Archivos/INFORME INDIVIDUAL DE CARTERA DE CREDITO (MODIFICADO)')
+    archivos = os.listdir(rutaRobot + '/Archivos/' + carpeta)
     archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
-    archivo = os.path.join(rutaRobot + '/Archivos/INFORME INDIVIDUAL DE CARTERA DE CREDITO (MODIFICADO)', archivo)
+    archivo = os.path.join(rutaRobot + '/Archivos/' + carpeta, archivo)
 
     tabla = pd.read_csv(archivo, usecols=columnas)
 
@@ -52,17 +49,20 @@ def obtenerTabla(fecha: Fecha):
 
 def filtrarTabla(tabla, fecha: Fecha, hoja):
 
-    _tabla = tabla[tabla['CodigoContable'].isin(
+    tabla = tabla[tabla['CodigoContable'].isin(
         codigosContables[hojas.index(hoja)])]
-    _tabla.drop('CodigoContable', axis=1, inplace=True)
+    tabla = tabla.loc[tabla['CodigoContable'].isin(codigosContables[hojas.index(hoja)])]
+    
+    tabla.drop('CodigoContable', axis=1, inplace=True)
 
-    return _tabla
+    return tabla
 
 
 def diligenciarCarteras(wb: xw.Book, fecha: Fecha):
     tabla = obtenerTabla(fecha)
     fechaAux = fecha
     for hoja in hojas:
+        print('Diligenciando ' + hoja + '. . .')
         tablaAux = filtrarTabla(tabla, fechaAux, hoja)
         ws = wb.sheets[hoja]
         # Eliminar datos desde A9 hasta la última fila

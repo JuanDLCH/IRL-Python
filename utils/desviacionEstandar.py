@@ -42,6 +42,7 @@ def obtenerDesviacionEstandar(fecha: datetime):
 
 
 def desviacionEstandar(fecha: datetime):
+    print('Validando desviación estándar. . .')
     fechaActual = Fecha(1, datetime.now().month, datetime.now().year)
     # Obtener archivos de una carpeta
     archivos = os.listdir(rutaRobot)
@@ -65,6 +66,7 @@ def desviacionEstandar(fecha: datetime):
 
     # Si la fecha del archivo es menor a la fecha actual, descargar el archivo
     if fechaArchivoDate.as_datetime() < fecha:
+        print('Descargando desviación estándar. . .')
         if existeArchivo:
             os.remove(rutaRobot + '/' + archivo)
         found = False
@@ -79,6 +81,4 @@ def desviacionEstandar(fecha: datetime):
             except:
                 pass
             fechaActual = fechaActual.add_months(-1)
-    else:
-        print('Ya existe el archivo')
     return obtenerDesviacionEstandar(fecha)

@@ -32,8 +32,10 @@ meses = {'ENERO': 1, 'FEBRERO': 2, 'MARZO': 3, 'ABRIL': 4, 'MAYO': 5, 'JUNIO': 6
 
 
 def validarCarpetas():
+    print('Validando carpetas. . .')
     # Si no existe la carpeta del robot, crearla
     if not os.path.exists(rutaRobot):
+        print('Creando carpeta y archivos del robot. . .')
         os.mkdir(rutaRobot)
         os.mkdir(rutaRobot + '/' + 'Archivos')
         for i in carpetas:
@@ -61,7 +63,7 @@ def clasificarArchivos():
     
     archivos = os.listdir(rutaRobot + '/ArchivosNuevos')
 
-
+    print('Clasificando los archivos. . .')
     # Clasificar los archivos
     for i in carpetas:
         for j in archivos:
@@ -88,6 +90,7 @@ def clasificarArchivos():
 
 def validarArchivos(primeraVez, fecha: Fecha):
     auxFecha = fecha
+    print('Validando archivos para diligenciamiento de ' + str(fecha.as_Text()) + '. . .')
     for i in carpetas:
         archivos = [os.path.splitext(filename)[0] for filename in os.listdir(rutaRobot + '/Archivos/' + i)]
         repeticiones = archivosPrimeraVez[carpetas.index(i)] if primeraVez else archivosSegundaVez[carpetas.index(i)]

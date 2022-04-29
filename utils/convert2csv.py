@@ -18,12 +18,18 @@ carpetas = [
     'SALDOS DIARIOS DE AHORRO'
 ]
 def convertiracsv():
+    print('Convirtiendo archivos a csv. . .')
     archivos = os.listdir(rutaRobot + '/ArchivosNuevos')
     for archivo in archivos:
         if archivo.lower().endswith('.xlsx') or archivo.lower().endswith('.xls'):
-            df = pd.read_excel(rutaRobot + '/ArchivosNuevos/' + archivo, sheet_name='SIAC', skiprows=3, engine='openpyxl')
+            print('Convirtiendo ' + archivo + ' a csv. . .')
+            try:
+                df = pd.read_excel(rutaRobot + '/ArchivosNuevos/' + archivo, sheet_name='SIAC', skiprows=3, engine='openpyxl')
+            except:
+                df = pd.read_excel(rutaRobot + '/ArchivosNuevos/' + archivo, sheet_name='SIAC', skiprows=3)
+
             os.remove(rutaRobot + '/ArchivosNuevos/' + archivo)
-            nombre = archivo.split('.')[0]
+            nombre = archivo.split('.')[0].replace('_', ' ')
             df.to_csv(rutaRobot + '/ArchivosNuevos/' + nombre + '.csv', index = None, header=True)
         else:
             nombreArchivo = archivo.replace('CSV', 'csv')
