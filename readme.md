@@ -31,3 +31,37 @@ Nos apoyamos de algunas liberías disponibles para Python con el fin de procesar
   Esta libería nos permitió listar rutas y archivos del sistema, borrar y renombrar archivos y carpetas, etc. Facilitando el trabajo con archivos para clasificación y validación
 - ### Sys
   Usamos esta libería principalmente para acceder a rutas temporales del sistema donde nuestro ejecutable desempaqueta el plano para trabajarlo, ya que la intención es que el usuario no tenga que lidiar dándole este archivo al robot.
+
+# Hojas del plano a diligenciar:
+  - [x] Indice promedio de morosidad 
+  - [x] Indice promedio de morosidad pat
+  - [x] Activos Liquidos
+
+
+  - [x] R. cartera
+    - [x] Consumo ventanilla
+    - [x] Consumo libranza
+    - [x] Comercial
+    - [x] Microcredito
+    - [x] Vivienda ventanilla
+    - [x] Vivienda libranza
+  <br><br>
+  - [ ] Recaudo
+    - [x] De aportes
+    - [ ] De ahorro contractual
+    - [ ] De ahorro permanente
+    - [ ] CxC
+  <br><br>
+  - [ ] Salidas
+    - [ ] De CDAT
+    - [ ] De Ahorro contractual
+    - [ ] Salidas de aportes
+    - [ ] Salidas de ahorro permanente
+    - [ ] Salidas fondos sociales pasivos
+  <br><br>
+  - [ ] Oblicaciones financieras
+  - [ ] Creditos aprobados
+  - [ ] Gastos administrativos
+  - [ ] Recaudo y remanentes
+  - [ ] CxP
+  - [ ] Saldos de ahorro ordinario
