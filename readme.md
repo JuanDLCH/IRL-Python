@@ -32,36 +32,46 @@ Nos apoyamos de algunas liberías disponibles para Python con el fin de procesar
 - ### Sys
   Usamos esta libería principalmente para acceder a rutas temporales del sistema donde nuestro ejecutable desempaqueta el plano para trabajarlo, ya que la intención es que el usuario no tenga que lidiar dándole este archivo al robot.
 
+# Entradas y Salidas
+El robot va a recibir los archivos necesarios para poder trabajar, estos son conocidos por cada cooperativa aunque también serán indicados dentro del manual de usuario. Estos deberán tener un formato de nombre que será 'ARCHIVO MES AÑO' (Ejemplo: 'CATALOGO DE CUENTAS JUNIO 2021.csv')
+
+Los archivos deberán estar en formato csv (También son permitidos archivos de excel como xls o xlsx, pero con estos el proceso será más tardado dado que el robot igual los convierte a csv antes de iniciar el trabajo). 
+
+El numero de archivos variará dependiendo de si es primera vez que se diligencia o no. Como salida tendremos el plano irl completamente diligenciado y listo para su envío.
+
+# Interfaz de usuario
+El robot únicamente necesita por entrada que el usuario le indique el mes, año y si es primera vez que va a diligenciar, por tanto la interfaz no deberá ser muy compleja para ser manipulada, inicialmente se intentará trabajar con Tkinter, aunque de haber más opciones de interfaz, se podría usar otra librería como Qt, etc, esto aún no está definido.
+
 # Hojas del plano a diligenciar:
-  - [x] Indice promedio de morosidad 
-  - [x] Indice promedio de morosidad pat
-  - [x] Activos Liquidos
+  - Indice promedio de morosidad &check;
+  - Indice promedio de morosidad pat &check;
+  - Activos Liquidos &check;
 
 
-  - [x] R. cartera
-    - [x] Consumo ventanilla
-    - [x] Consumo libranza
-    - [x] Comercial
-    - [x] Microcredito
-    - [x] Vivienda ventanilla
-    - [x] Vivienda libranza
+  - R. cartera &check;
+    - Consumo ventanilla &check;
+    - Consumo libranza &check;
+    - Comercial &check;
+    - Microcredito &check;
+    - Vivienda ventanilla &check;
+    - Vivienda libranza &check;
   <br><br>
-  - [ ] Recaudo
-    - [x] De aportes
-    - [ ] De ahorro contractual
-    - [ ] De ahorro permanente
-    - [ ] CxC
+  - Recaudo &cross;
+    - De aportes &check;
+    - De ahorro contractual &cross;
+    - De ahorro permanente &cross;
+    - CxC &cross;
   <br><br>
-  - [ ] Salidas
-    - [ ] De CDAT
-    - [ ] De Ahorro contractual
-    - [ ] Salidas de aportes
-    - [ ] Salidas de ahorro permanente
-    - [ ] Salidas fondos sociales pasivos
+  - Salidas &cross;
+    - De CDAT &cross;
+    - De Ahorro contractual &cross;
+    - Salidas de aportes &cross;
+    - Salidas de ahorro permanente &cross;
+    - Salidas fondos sociales pasivos &cross;
   <br><br>
-  - [ ] Oblicaciones financieras
-  - [ ] Creditos aprobados
-  - [ ] Gastos administrativos
-  - [ ] Recaudo y remanentes
-  - [ ] CxP
-  - [ ] Saldos de ahorro ordinario
+  - Oblicaciones financieras &cross;
+  - Creditos aprobados &cross;
+  - Gastos administrativos &cross;
+  - Recaudo y remanentes &cross;
+  - CxP &cross;
+  - Saldos de ahorro ordinario &cross;

@@ -24,13 +24,13 @@ def convertiracsv():
         if archivo.lower().endswith('.xlsx') or archivo.lower().endswith('.xls'):
             print('Convirtiendo ' + archivo + ' a csv. . .')
             try:
-                df = pd.read_excel(rutaRobot + '/ArchivosNuevos/' + archivo, sheet_name='SIAC', skiprows=3, engine='openpyxl')
+                df = pd.read_excel(rutaRobot + '/ArchivosNuevos/' + archivo, sheet_name='SIAC', engine='openpyxl')
             except:
-                df = pd.read_excel(rutaRobot + '/ArchivosNuevos/' + archivo, sheet_name='SIAC', skiprows=3)
+                df = pd.read_excel(rutaRobot + '/ArchivosNuevos/' + archivo, sheet_name='SIAC')
 
             os.remove(rutaRobot + '/ArchivosNuevos/' + archivo)
             nombre = archivo.split('.')[0].replace('_', ' ')
-            df.to_csv(rutaRobot + '/ArchivosNuevos/' + nombre + '.csv', index = None, header=True)
+            df.to_csv(rutaRobot + '/ArchivosNuevos/' + nombre + '.csv', index = None, header=True, encoding='ANSI', sep=';')
         else:
             nombreArchivo = archivo.replace('CSV', 'csv')
             # Renombrar archivo

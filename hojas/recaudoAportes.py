@@ -5,16 +5,18 @@ from utils.fecha import *
 import os
 from utils.globals import rutaRobot
 
-def recaudoAportes(wb: xw.Book, fecha: Fecha, primeraVez: bool):
+carpeta = 'INFORME INDIVIDUAL DE APORTES O CONTRIBUCIONES'
+
+def recaudoAportes(fecha: Fecha, primeraVez: bool, wb: xw.Book):
     print('Diligenciando Recaudo de Aportes. . .')
-    archivos = os.listdir(rutaRobot + '/Archivos/INFORME INDIVIDUAL DE APORTES O CONTRIBUCIONES')
+    archivos = os.listdir(rutaRobot + '/Archivos/' + carpeta)
     ws = wb.sheets['Recaudo de Aportes']
     if primeraVez:
         fecha = fecha.add_months(-24)
         for i in range(25):
             archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
-            archivo = os.path.join(rutaRobot + '/Archivos/INFORME INDIVIDUAL DE APORTES O CONTRIBUCIONES', archivo)
-            tabla = pd.read_csv(archivo, usecols=['Saldo a fecha'])
+            archivo = os.path.join(rutaRobot + '/Archivos/INFORME INDIVIDUAL DE APORTES O CONTRIBUCIONES/', archivo)
+            tabla = pd.read_csv(archivo, skiprows=3, usecols=['Saldo a fecha'], encoding='ANSI', sep=';')
             total = tabla['Saldo a fecha'].sum()
 
             #Fechas
@@ -22,7 +24,7 @@ def recaudoAportes(wb: xw.Book, fecha: Fecha, primeraVez: bool):
             fecha = fecha.add_days(-1)
             mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
             ws.range('A' + str(i + 13)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
-            ws.range('B' + str(i + 13)).value = fecha.as_Text()
+            ws.range('B' + str(i + 13)).value = total
 
             fecha = fecha.add_months(1)
             fecha.setDay(1)
@@ -32,14 +34,13 @@ def recaudoAportes(wb: xw.Book, fecha: Fecha, primeraVez: bool):
         total = tabla['Saldo a fecha'].sum()
 
         fila = ws.range('A13:A').end('down').row
-        ws.range('A' + str(fila)).value = fecha.as_Text()
 
         #Fechas
         fecha = fecha.add_months(1)
         fecha = fecha.add_days(-1)
         mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
-        ws.range('A' + fila).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
-        ws.range('B' + fila).value = fecha.as_Text()
+        ws.range('A' + str(fila)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
+        ws.range('B' + str(fila)).value = total
 
         ws.range("C37:I37").api.AutoFill(ws.range("C37:F{row}".format(row=fila)).api, 0 )
 

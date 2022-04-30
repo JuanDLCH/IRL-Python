@@ -35,7 +35,7 @@ def obtenerTabla(fecha: Fecha):
     archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
     archivo = os.path.join(rutaRobot + '/Archivos/' + carpeta, archivo)
 
-    tabla = pd.read_csv(archivo, usecols=columnas)
+    tabla = pd.read_csv(archivo, usecols=columnas, skiprows=3, encoding='ANSI', sep=';')
 
     #tabla = tabla[(tabla['fechaultimopago'] >= fecha.as_datetime()) & (
     #    tabla['fechaultimopago'] < fecha.add_months(1).as_datetime())]
