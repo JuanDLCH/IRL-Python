@@ -1,9 +1,8 @@
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from utils.globals import meses
 
 date_format = '%d/%m/%Y'
-
-meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE']
 
 #crear clase
 class Fecha:

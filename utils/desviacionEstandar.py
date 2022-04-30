@@ -8,16 +8,9 @@ import pandas as pd
 from pyparsing import withAttribute
 import wget
 from utils.fecha import Fecha
+from utils.globals import *
 
 url = 'https://www.supersolidaria.gov.co/sites/default/files/public/data/desviacion_estandar_'
-
-meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
-    'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE']
-
-
-# Obtener ruta de la carpeta documentos
-rutaDocumentos = os.path.join(os.path.expanduser('~'), 'Documents')
-rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
 
 def obtenerDesviacionEstandar(fecha: datetime):
     archivos = os.listdir(rutaRobot)

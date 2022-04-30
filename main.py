@@ -16,12 +16,7 @@ from hojas.cartera import diligenciarCarteras
 from hojas.ipm import ipm
 import sys
 from hojas.activosLiquidos import activosLiquidos
-
-root = Tk()
-root.withdraw()
-
-meses = {'ENERO': 1, 'FEBRERO': 2, 'MARZO': 3, 'ABRIL': 4, 'MAYO': 5, 'JUNIO': 6,
-         'JULIO': 7, 'AGOSTO': 8, 'SEPTIEMBRE': 9, 'OCTUBRE': 10, 'NOVIEMBRE': 11, 'DICIEMBRE': 12}
+from PyQt5 import QtWidgets# Create an instance of our class
 
 carpetas = [
     'CATALOGO DE CUENTAS',
@@ -53,7 +48,7 @@ def resource_path(relative_path):
     
 
 
-def main():
+def main(mes, anio, primeraVez):
     # Iniciar un cronometro
     start_time = datetime.now()  
 
@@ -64,7 +59,7 @@ def main():
     anio = 2021
     primeraVez = True
 
-    fecha = Fecha(1, meses[mes.upper()], anio)
+    fecha = Fecha(1, meses.index(mes.upper()) + 1, anio)
     print(fecha.as_String())
     validarCarpetas()
     clasificarArchivos()
@@ -95,8 +90,3 @@ def main():
     print('Tiempo de ejecucion: {}'.format(end_time - start_time))
 
     planoVisible()
-
-    messagebox.showinfo("RobotIRL", "Termine")
-
-
-main()

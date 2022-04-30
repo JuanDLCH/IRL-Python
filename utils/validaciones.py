@@ -5,12 +5,8 @@ from tkinter import *
 from tkinter import messagebox
 import pandas as pd
 from utils.convert2csv import convertiracsv
-
-root = Tk()
-root.withdraw()
-
-rutaDocumentos = os.path.join(os.path.expanduser('~'), 'Documents')
-rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
+from utils.globals import *
+import wget
 
 carpetas = [
     'CATALOGO DE CUENTAS',
@@ -27,21 +23,34 @@ archivosPrimeraVez = [13, 1, 13, 25, 13, 25, 1, 1]
 
 archivosSegundaVez = [1 , 1, 1 , 2 , 1 , 2, 1, 1]
 
-meses = {'ENERO': 1, 'FEBRERO': 2, 'MARZO': 3, 'ABRIL': 4, 'MAYO': 5, 'JUNIO': 6,
-         'JULIO': 7, 'AGOSTO': 8, 'SEPTIEMBRE': 9, 'OCTUBRE': 10, 'NOVIEMBRE': 11, 'DICIEMBRE': 12}
-
+def crearCarpetas():
+    os.mkdir(rutaRobot)
+    os.mkdir(rutaRobot + '/' + 'Archivos')
+    for i in carpetas:
+        os.mkdir(rutaRobot + '/' + 'Archivos' + '/' + i)
+    os.mkdir(rutaRobot + '/' + 'PlanosDiligenciados')
+    os.mkdir(rutaRobot + '/' + 'ArchivosNuevos')
+    found = False
+    url = 'https://www.supersolidaria.gov.co/sites/default/files/public/data/desviacion_estandar_'
+    fechaActual = Fecha(1, datetime.now().month, datetime.now().year)
+    while not found:
+        try:
+            if os.path.exists(rutaRobot + '/Desviacion-estandar ' + fechaActual.as_Text().lower() + '.xlsx'):
+                found = True
+            else:
+                wget.download(url + fechaActual.as_Text().lower().replace(' ', '_') + '.xlsx',
+                                rutaRobot + '/Desviacion-estandar ' + fechaActual.as_Text().lower() + '.xlsx')
+                found = True
+        except:
+            pass
+        fechaActual = fechaActual.add_months(-1)
 
 def validarCarpetas():
     print('Validando carpetas. . .')
     # Si no existe la carpeta del robot, crearla
     if not os.path.exists(rutaRobot):
         print('Creando carpeta y archivos del robot. . .')
-        os.mkdir(rutaRobot)
-        os.mkdir(rutaRobot + '/' + 'Archivos')
-        for i in carpetas:
-            os.mkdir(rutaRobot + '/' + 'Archivos' + '/' + i)
-        os.mkdir(rutaRobot + '/' + 'PlanosDiligenciados')
-        os.mkdir(rutaRobot + '/' + 'ArchivosNuevos')
+        crearCarpetas()
 
         # Abrir el explorador de archivos en la carpeta del robot
         os.system('explorer ' + rutaRobot + '\ArchivosNuevos')
@@ -65,16 +74,16 @@ def clasificarArchivos():
 
     print('Clasificando los archivos. . .')
     # Clasificar los archivos
-    for i in carpetas:
-        for j in archivos:
-            if j.startswith(i):
-                for l in meses.keys():
-                    if l in j.upper():
-                        if os.path.exists(rutaRobot + '/Archivos/' + i + '/' + j):
-                            os.remove(rutaRobot + '/Archivos/' + i + '/' + j)
+    for carpeta in carpetas:
+        for archivo in archivos:
+            if archivo.startswith(carpeta):
+                for mes in meses:
+                    if mes in archivo.upper():
+                        if os.path.exists(rutaRobot + '/Archivos/' + carpeta + '/' + archivo):
+                            os.remove(rutaRobot + '/Archivos/' + carpeta + '/' + archivo)
                             
-                        os.rename(rutaRobot + '/ArchivosNuevos/' + j,
-                                rutaRobot + '/Archivos/' + i + '/' + j)
+                        os.rename(rutaRobot + '/ArchivosNuevos/' + archivo,
+                                rutaRobot + '/Archivos/' + carpeta + '/' + archivo)
                         break
 
     # Si quedaron archivos en la carpeta ArchivosNuevos
@@ -91,14 +100,14 @@ def clasificarArchivos():
 def validarArchivos(primeraVez, fecha: Fecha):
     auxFecha = fecha
     print('Validando archivos para diligenciamiento de ' + str(fecha.as_Text()) + '. . .')
-    for i in carpetas:
-        archivos = [os.path.splitext(filename)[0] for filename in os.listdir(rutaRobot + '/Archivos/' + i)]
-        repeticiones = archivosPrimeraVez[carpetas.index(i)] if primeraVez else archivosSegundaVez[carpetas.index(i)]
+    for carpeta in carpetas:
+        archivos = [os.path.splitext(filename)[0] for filename in os.listdir(rutaRobot + '/Archivos/' + carpeta)]
+        repeticiones = archivosPrimeraVez[carpetas.index(carpeta)] if primeraVez else archivosSegundaVez[carpetas.index(carpeta)]
         repeticiones -= 1
         auxFecha = fecha.add_months(-repeticiones)
         for j in range(repeticiones):
             if primeraVez:
-                nombreArchivo = i + ' ' + auxFecha.as_Text()
+                nombreArchivo = carpeta + ' ' + auxFecha.as_Text()
                 if nombreArchivo not in archivos:
                     messagebox.showinfo("RobotIRL", "No pude encontrar  el archivo " + nombreArchivo +
                                         " te abriré la carpeta de archivos para que lo muevas o lo busques y corrijas.")
@@ -109,4 +118,4 @@ def validarArchivos(primeraVez, fecha: Fecha):
 
             else:
                 auxFecha = fecha.add_months(
-                    archivosSegundaVez[carpetas.index(i)])
+                    archivosSegundaVez[carpetas.index(carpeta)])
