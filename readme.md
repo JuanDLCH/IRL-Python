@@ -27,6 +27,13 @@ Nos apoyamos de algunas liberías disponibles para Python con el fin de procesar
     pip install openpyxl
   ```
 
+- ### PyQt5
+  Usamos PyQt5 para integrar la interfaz de usuario diseñada previamente con Qt Designer.
+  
+  ```python
+  pip install pyqt5
+  ```
+  
 - ### Os
   Esta libería nos permitió listar rutas y archivos del sistema, borrar y renombrar archivos y carpetas, etc. Facilitando el trabajo con archivos para clasificación y validación
 - ### Sys
@@ -40,7 +47,13 @@ Los archivos deberán estar en formato csv (También son permitidos archivos de 
 El numero de archivos variará dependiendo de si es primera vez que se diligencia o no. Como salida tendremos el plano irl completamente diligenciado y listo para su envío.
 
 # Interfaz de usuario
-El robot únicamente necesita por entrada que el usuario le indique el mes, año y si es primera vez que va a diligenciar, por tanto la interfaz no deberá ser muy compleja para ser manipulada, inicialmente se intentará trabajar con Tkinter, aunque de haber más opciones de interfaz, se podría usar otra librería como Qt, etc, esto aún no está definido.
+El robot únicamente necesita por entrada que el usuario le indique el mes, año y si es primera vez que va a diligenciar, por tanto la interfaz no deberá ser muy compleja para ser manipulada, esta la hicimos utilizando Qt Designer y la implementamos mediante a librería PyQt5, recibirá Mes, Año, Primera vez y tendrá 2 opciones extra, una para abrir la carpeta contenedora de los archivos y otra para abrir el manual de usuario del robot, y será algo como esto.
+
+![Interfaz](https://i.imgur.com/R4yxNFo.png)
+
+La propia interfaz se encargará de decirle al usuario si hay un error en el ingreso de los datos, por ejemplo, al ingresar una fecha que no es posible diligenciar o si no seleccionó una fecha adecuadamente, todo esto, sin parar el programa.
+
+
 
 # Hojas del plano a diligenciar:
   - Indice promedio de morosidad &check;
