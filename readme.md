@@ -51,6 +51,8 @@ El robot únicamente necesita por entrada que el usuario le indique el mes, año
 
 ![Interfaz](https://i.imgur.com/R4yxNFo.png)
 
+La propia interfaz se encargará de decirle al usuario si hay un error en el ingreso de los datos, por ejemplo, al ingresar una fecha que no es posible diligenciar o si no seleccionó una fecha adecuadamente, todo esto, sin parar el programa.
+
 
 
 # Hojas del plano a diligenciar:
