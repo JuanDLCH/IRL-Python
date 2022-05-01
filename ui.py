@@ -11,8 +11,10 @@ from main import *
 class Ui(QtWidgets.QDialog):
 
     def __init__(self):
+
+        path = resource_path('interfaz.ui')
         super(Ui, self).__init__() # Call the inherited classes __init__ method
-        uic.loadUi('ui/interfaz.ui', self) # Load the .ui file
+        uic.loadUi(path, self) # Load the .ui file
 
         btnStart = self.findChild(QPushButton, 'btnStart')
         btnStart.clicked.connect(self.iniciar)

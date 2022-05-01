@@ -35,16 +35,6 @@ archivosSegundaVez = [1 , 1, 1 , 2 , 1 , 2, 1, 1]
 # Obtener ruta de la carpeta documentos
 rutaDocumentos = os.path.join(os.path.expanduser('~'), 'Documents')
 rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
-
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
-    try:
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
     
 
 
@@ -54,10 +44,6 @@ def main(mes, anio, primeraVez):
 
     path = resource_path('planoirl.xlsm')
     plano = ExcelFile(path)
-
-    mes = 'Junio'
-    anio = 2021
-    primeraVez = True
 
     fecha = Fecha(1, meses.index(mes.upper()) + 1, anio)
     print(fecha.as_String())
