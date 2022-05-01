@@ -49,7 +49,7 @@ El numero de archivos variará dependiendo de si es primera vez que se diligenci
 # Interfaz de usuario
 El robot únicamente necesita por entrada que el usuario le indique el mes, año y si es primera vez que va a diligenciar, por tanto la interfaz no deberá ser muy compleja para ser manipulada, esta la hicimos utilizando Qt Designer y la implementamos mediante a librería PyQt5, recibirá Mes, Año, Primera vez y tendrá 2 opciones extra, una para abrir la carpeta contenedora de los archivos y otra para abrir el manual de usuario del robot, y será algo como esto.
 
-![Interfaz](https://imgur.com/R4yxNFo)
+![Interfaz](https://imgur.com/gallery/mRDDqqp)
 
 
 
