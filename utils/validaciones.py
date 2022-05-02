@@ -7,6 +7,8 @@ import pandas as pd
 from utils.convert2csv import convertiracsv
 from utils.globals import *
 import wget
+import urllib
+
 
 carpetas = [
     'CATALOGO DE CUENTAS',
@@ -38,9 +40,8 @@ def crearCarpetas():
             if os.path.exists(rutaRobot + '/Desviacion-estandar ' + fechaActual.as_Text().lower() + '.xlsx'):
                 found = True
             else:
-                wget.download(url + fechaActual.as_Text().lower().replace(' ', '_') + '.xlsx',
-                                rutaRobot + '/Desviacion-estandar ' + fechaActual.as_Text().lower() + '.xlsx')
-                found = True
+                found = descargarArchivo(url + fechaActual.as_Text().lower().replace(' ', '_') + '.xlsx', rutaRobot + '/Desviacion-estandar ' + fechaActual.as_Text().lower() + '.xlsx')
+                
         except:
             pass
         fechaActual = fechaActual.add_months(-1)

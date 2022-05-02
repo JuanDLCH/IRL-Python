@@ -19,3 +19,22 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
+
+def descargarArchivo(url, nombre):
+    # Descargar archivo ignorando certificados SSL
+    import ssl
+    import urllib.request
+    import urllib.error
+    import urllib.parse
+    #Descargar 
+    try:
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        print(url)
+        urllib.request.urlretrieve(url, nombre)
+        return True
+    except urllib.error.HTTPError as e:
+        print('Error: ' + str(e.code))
+        QMessageBox.critical(None, 'Error', 'Error: ' + str(e.code))
+        return False
