@@ -6,6 +6,7 @@ from datetime import datetime
 from pandas import ExcelFile
 from hojas.ipm import ipm, ipmpat
 from hojas.recaudoAportes import recaudoAportes
+from hojas.recaudoac import recaudoac
 from utils.desviacionEstandar import desviacionEstandar
 from utils.fecha import *
 import xlwings as xw
@@ -67,6 +68,7 @@ def main(mes, anio, primeraVez):
     ipmpat(fecha, primeraVez, wb)
     activosLiquidos(fecha, primeraVez, wb)
     recaudoAportes(fecha, primeraVez, wb)
+    recaudoac(fecha, primeraVez, wb)
 
     print('Guardando plano. . .')
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')

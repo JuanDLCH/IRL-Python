@@ -1,7 +1,9 @@
 import os
 from PyQt5.QtWidgets import QMessageBox
 import sys
+from utils.fecha import *
 
+fechaActual = Fecha(1, datetime.now().month, datetime.now().year)
 # Obtener ruta de la carpeta documentos
 rutaDocumentos = os.path.join(os.path.expanduser('~'), 'Documents')
 rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
