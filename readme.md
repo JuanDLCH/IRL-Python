@@ -79,7 +79,7 @@ La propia interfaz se encargará de decirle al usuario si hay un error en el ing
 - Recaudo &cross;
 
   - De aportes
-  - De ahorro contractual &cross;
+  - De ahorro contractual &check;
   - De ahorro permanente &cross;
   - CxC &cross;
     `<br><br>`
