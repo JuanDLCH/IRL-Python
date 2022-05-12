@@ -58,7 +58,7 @@ def validarCarpetas():
 
         # MessageBox
         messagebox.showinfo(
-            'RobotIRL', 'Parece que no hay archivos para la ejecución, he abierto la carpeta por ti, deja los archivos aqui y vuelve a ejecutar el robot.')
+            'RobotIRL', 'Parece que no hay archivos para la ejecución, he abierto la carpeta por ti, deja los archivos aqui y vuelve a ejecutar el robot.' )
         exit()
     else:
         clasificarArchivos()
