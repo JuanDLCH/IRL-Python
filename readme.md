@@ -68,7 +68,6 @@ La propia interfaz se encargará de decirle al usuario si hay un error en el ing
 - Indice promedio de morosidad pat &check;
 - Activos Liquidos &check;
 - R. cartera &check;
-
   - Consumo ventanilla &check;
   - Consumo libranza &check;
   - Comercial &check;
@@ -76,24 +75,19 @@ La propia interfaz se encargará de decirle al usuario si hay un error en el ing
   - Vivienda ventanilla &check;
   - Vivienda libranza &check;
     `<br><br>`
-- Recaudo &cross;
-
-  - De aportes
+    
+- Recaudo &check;
+  - De aportes &check;
   - De ahorro contractual &check;
-  - De ahorro permanente &cross;
-  - CxC &cross;
+  - De ahorro permanente &check;
+  - CxC &check;
     `<br><br>`
 - Salidas &cross;
-
-  De CDAT &cross;
-
-  De Ahorro contractual &cross;
-
-  Salidas de aportes &cross;
-
-  Salidas de ahorro permanente &cross;
-
-  Salidas fondos sociales pasivos &cross;
+  - De CDAT &cross;
+  - De Ahorro contractual &cross;
+  - Salidas de aportes &cross;
+  - Salidas de ahorro permanente &cross;
+  - Salidas fondos sociales pasivos &cross;
   `<br><br>`
 - Oblicaciones financieras &cross;
 - Creditos aprobados &cross;
