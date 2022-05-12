@@ -74,21 +74,22 @@ La propia interfaz se encargará de decirle al usuario si hay un error en el ing
   - Microcredito &check;
   - Vivienda ventanilla &check;
   - Vivienda libranza &check;
-    `<br><br>`
+    <br><br>
     
 - Recaudo &check;
   - De aportes &check;
   - De ahorro contractual &check;
   - De ahorro permanente &check;
   - CxC &check;
-    `<br><br>`
+    <br><br>
 - Salidas &cross;
   - De CDAT &cross;
   - De Ahorro contractual &cross;
   - Salidas de aportes &cross;
   - Salidas de ahorro permanente &cross;
   - Salidas fondos sociales pasivos &cross;
-  `<br><br>`
+    <br><br>
+    
 - Oblicaciones financieras &cross;
 - Creditos aprobados &cross;
 - Gastos administrativos &cross;
