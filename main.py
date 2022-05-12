@@ -1,6 +1,4 @@
 import os
-from tkinter import *
-from tkinter import messagebox
 import datetime
 from datetime import datetime
 from pandas import ExcelFile
@@ -16,9 +14,8 @@ from xlwings import App
 from utils.validaciones import *
 from hojas.cartera import diligenciarCarteras
 from hojas.ipm import ipm
-import sys
 from hojas.activosLiquidos import activosLiquidos
-from PyQt5 import QtWidgets# Create an instance of our class
+from hojas.cxc import cxc
 
 carpetas = [
     'CATALOGO DE CUENTAS',
@@ -71,6 +68,7 @@ def main(mes, anio, primeraVez):
     recaudoAportes(fecha, primeraVez, wb)
     recaudoac(fecha, primeraVez, wb)
     recaudoap(fecha,primeraVez,wb)
+    cxc(fecha, primeraVez, wb)
     print('Guardando plano. . .')
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
 

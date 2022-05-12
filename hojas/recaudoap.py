@@ -45,13 +45,3 @@ def recaudoap(fecha: Fecha, primeraVez: bool , wb: xw.Book):
         suma = tabla['Saldo'].sum()
 
         ws.range('B' + str(ultimaFila + 1)).value = suma
-
-        # Arrastrar formulas de la fila anterior
-        ws.range("A{row}:I{row}".format(row = ultimaFila)).api.AutoFill(ws.range("A{row}:F{row}".format(row=ultimaFila + 1)).api, 0 )
-
-        # Formato de celdas
-        ws.range('A12:I' + str(ultimaFila + 1)).api.Borders(11).LineStyle = 1 #Linea Vertical
-        ws.range('A12:I' + str(ultimaFila + 2)).api.Borders(12).LineStyle = 1 #Linea Horizontal
-        
-        # Cambiar fuente
-        ws.range('A12:I' + str(ultimaFila + 1)).api.Font.Name = 'Verdana'
