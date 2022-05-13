@@ -9,7 +9,7 @@ cuentas = [ 212505,212510,212515, 212520 ]
 
 
 def recaudoac(fecha: Fecha, primeraVez: bool , wb: xw.Book):
-    print ('Diligenciando Recaudo de Ahorro Contractual')
+    print ('Diligenciando Recaudo de Ahorro Contractual. . .')
     archivos = os.listdir('{}/Archivos/{}'.format(rutaRobot, doc))
     ws = wb.sheets[hoja]
     mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)

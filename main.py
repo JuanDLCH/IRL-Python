@@ -54,6 +54,9 @@ def main(mes, anio, primeraVez):
 
     # Abrir el plano
     print('Abriendo plano. . .')
+    app_excel = xw.App(visible = False)
+
+    
     wb = xw.Book(plano)
     print('Iniciando sesion. . .')
     planoInvisible = wb.macro('Visibility.makeInvisible') 

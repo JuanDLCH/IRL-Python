@@ -10,7 +10,7 @@ hoja = 'Recaudo de Ahorro Permanente'
 cuentas = [213005, 213010, 213015, 213020]
 
 def recaudoap(fecha: Fecha, primeraVez: bool , wb: xw.Book):
-    print ('Diligenciando Recaudo de Ahorro Permanente')
+    print ('Diligenciando Recaudo de Ahorro Permanente. . .')
     archivos = os.listdir('{}/Archivos/{}'.format(rutaRobot, doc))
     ws = wb.sheets[hoja]
     mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)

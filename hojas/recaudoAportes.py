@@ -11,6 +11,8 @@ def recaudoAportes(fecha: Fecha, primeraVez: bool, wb: xw.Book):
     print('Diligenciando Recaudo de Aportes. . .')
     archivos = os.listdir(rutaRobot + '/Archivos/' + carpeta)
     ws = wb.sheets['Recaudo de Aportes']
+    mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
+    ws.range('B8').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
     if primeraVez:
         fecha = fecha.add_months(-24)
         for i in range(25):
