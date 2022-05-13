@@ -83,8 +83,8 @@ La propia interfaz se encargará de decirle al usuario si hay un error en el ing
   - CxC &check;
     <br><br>
 - Salidas &cross;
-  - De CDAT &cross;
-  - De Ahorro contractual &cross;
+  - De CDAT &check;
+  - De Ahorro contractual &check;
   - Salidas de aportes &cross;
   - Salidas de ahorro permanente &cross;
   - Salidas fondos sociales pasivos &cross;
