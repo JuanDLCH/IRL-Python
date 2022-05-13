@@ -45,3 +45,4 @@ def recaudoap(fecha: Fecha, primeraVez: bool , wb: xw.Book):
         suma = tabla['Saldo'].sum()
 
         ws.range('B' + str(ultimaFila + 1)).value = suma
+

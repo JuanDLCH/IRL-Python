@@ -16,6 +16,7 @@ from hojas.cartera import diligenciarCarteras
 from hojas.ipm import ipm
 from hojas.activosLiquidos import activosLiquidos
 from hojas.cxc import cxc
+from hojas.salidas import salidaCdatyAC
 
 carpetas = [
     'CATALOGO DE CUENTAS',
@@ -69,6 +70,8 @@ def main(mes, anio, primeraVez):
     recaudoac(fecha, primeraVez, wb)
     recaudoap(fecha,primeraVez,wb)
     cxc(fecha, primeraVez, wb)
+    salidaCdatyAC(fecha, primeraVez, wb)
+    wb.api.RefreshAll()
     print('Guardando plano. . .')
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
 

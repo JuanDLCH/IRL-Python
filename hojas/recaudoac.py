@@ -13,7 +13,6 @@ def recaudoac(fecha: Fecha, primeraVez: bool , wb: xw.Book):
     archivos = os.listdir('{}/Archivos/{}'.format(rutaRobot, doc))
     ws = wb.sheets[hoja]
     mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
-    ws.range('B6').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
     if primeraVez:
         fechaAux = fecha.add_months(-24)
 
@@ -44,5 +43,7 @@ def recaudoac(fecha: Fecha, primeraVez: bool , wb: xw.Book):
         suma = tabla['Saldo'].sum()
 
         ws.range('B' + str(ultimaFila + 1)).value = suma
+    
+    ws.range('B6').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
 
 
