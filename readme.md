@@ -90,7 +90,7 @@ La propia interfaz se encargará de decirle al usuario si hay un error en el ing
   - Salidas fondos sociales pasivos &cross;
     <br><br>
     
-- Oblicaciones financieras &cross;
+- Oblicaciones financieras &check;
 - Creditos aprobados &cross;
 - Gastos administrativos &cross;
 - Recaudo y remanentes &cross;

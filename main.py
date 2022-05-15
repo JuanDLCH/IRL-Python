@@ -3,6 +3,7 @@ import datetime
 from datetime import datetime
 from pandas import ExcelFile
 from hojas.ipm import ipm, ipmpat
+from hojas.obligacionesFinancieras import obligacionesFinancieras
 from hojas.recaudoAportes import recaudoAportes
 from hojas.recaudoac import recaudoac
 from hojas.recaudoap import recaudoap
@@ -73,6 +74,7 @@ def main(mes, anio, primeraVez):
     recaudoap(fecha,primeraVez,wb)
     cxc(fecha, primeraVez, wb)
     salidaCdatyAC(fecha, primeraVez, wb)
+    obligacionesFinancieras(fecha, primeraVez, wb)
     wb.api.RefreshAll()
     print('Guardando plano. . .')
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
