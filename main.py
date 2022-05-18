@@ -18,6 +18,7 @@ from hojas.ipm import ipm
 from hojas.activosLiquidos import activosLiquidos
 from hojas.cxc import cxc
 from hojas.salidas import salidaCdatyAC
+from hojas.creditosAprobados import creditosAprobados
 
 carpetas = [
     'CATALOGO DE CUENTAS',
@@ -75,6 +76,7 @@ def main(mes, anio, primeraVez):
     cxc(fecha, primeraVez, wb)
     salidaCdatyAC(fecha, primeraVez, wb)
     obligacionesFinancieras(fecha, primeraVez, wb)
+    creditosAprobados(fecha, wb)
     wb.api.RefreshAll()
     print('Guardando plano. . .')
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
