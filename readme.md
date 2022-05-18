@@ -91,8 +91,8 @@ La propia interfaz se encargará de decirle al usuario si hay un error en el ing
     <br><br>
     
 - Oblicaciones financieras &check;
-- Creditos aprobados &cross;
-- Gastos administrativos &cross;
+- Creditos aprobados &check;
+- Gastos administrativos &check;
 - Recaudo y remanentes &cross;
 - CxP &cross;
 - Saldos de ahorro ordinario &cross;
