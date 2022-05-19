@@ -11,80 +11,88 @@ Dándonos cuenta de que no había interacción con la UI y era sólo trabajo de 
 # Proceso de automatización:
 
 ## Librerías:
+
 Nos apoyamos de algunas liberías disponibles para Python con el fin de procesar los datos de la manera más eficiente posible. Algunas de estas son:
 
 - ### Pandas:
+
   Inicialmente utilizamos Pandas para leer los archivos de excel y convertirlos a csv (Para una lectura más eficiente y rápida), luego, tratando los archivos como dataframes, fue más sencillo realizar trabajos de cálculo y filtrado de los datos que suelen tener un volúmen considerable.
+
 
   ```python
     pip install pandas
   ```
+
   - ### XLWings y Openpyxl
+
   Apoyándonos en estas 2 librerías trabajamos lo que fue la edición del Plano, XLWings se encargó de la mayoría del trabajo, Openpyxl a pesar de tener funciones muy similares, no es tan amigable con archivos que tienen macros, como el plano, por lo que únicamente la usamos como motor para la lectura de algunos archivos viejos (XLS) que nos suelen estar empaquetados.
 
-   ```python
-    pip install xlwings
-    pip install openpyxl
+  ```python
+   pip install xlwings
+   pip install openpyxl
   ```
-
 - ### PyQt5
+
   Usamos PyQt5 para integrar la interfaz de usuario diseñada previamente con Qt Designer.
-  
+
+
   ```python
   pip install pyqt5
   ```
-  
 - ### Os
+
   Esta libería nos permitió listar rutas y archivos del sistema, borrar y renombrar archivos y carpetas, etc. Facilitando el trabajo con archivos para clasificación y validación
 - ### Sys
+
   Usamos esta libería principalmente para acceder a rutas temporales del sistema donde nuestro ejecutable desempaqueta el plano para trabajarlo, ya que la intención es que el usuario no tenga que lidiar dándole este archivo al robot.
 
 # Entradas y Salidas
+
 El robot va a recibir los archivos necesarios para poder trabajar, estos son conocidos por cada cooperativa aunque también serán indicados dentro del manual de usuario. Estos deberán tener un formato de nombre que será 'ARCHIVO MES AÑO' (Ejemplo: 'CATALOGO DE CUENTAS JUNIO 2021.csv')
 
-Los archivos deberán estar en formato csv (También son permitidos archivos de excel como xls o xlsx, pero con estos el proceso será más tardado dado que el robot igual los convierte a csv antes de iniciar el trabajo). 
+Los archivos deberán estar en formato csv (También son permitidos archivos de excel como xls o xlsx, pero con estos el proceso será más tardado dado que el robot igual los convierte a csv antes de iniciar el trabajo).
 
 El numero de archivos variará dependiendo de si es primera vez que se diligencia o no. Como salida tendremos el plano irl completamente diligenciado y listo para su envío.
 
 # Interfaz de usuario
+
 El robot únicamente necesita por entrada que el usuario le indique el mes, año y si es primera vez que va a diligenciar, por tanto la interfaz no deberá ser muy compleja para ser manipulada, esta la hicimos utilizando Qt Designer y la implementamos mediante a librería PyQt5, recibirá Mes, Año, Primera vez y tendrá 2 opciones extra, una para abrir la carpeta contenedora de los archivos y otra para abrir el manual de usuario del robot, y será algo como esto.
 
 ![Interfaz](https://i.imgur.com/R4yxNFo.png)
 
 La propia interfaz se encargará de decirle al usuario si hay un error en el ingreso de los datos, por ejemplo, al ingresar una fecha que no es posible diligenciar o si no seleccionó una fecha adecuadamente, todo esto, sin parar el programa.
 
-
-
 # Hojas del plano a diligenciar:
-  - Indice promedio de morosidad &check;
-  - Indice promedio de morosidad pat &check;
-  - Activos Liquidos &check;
 
-
-  - R. cartera &check;
-    - Consumo ventanilla &check;
-    - Consumo libranza &check;
-    - Comercial &check;
-    - Microcredito &check;
-    - Vivienda ventanilla &check;
-    - Vivienda libranza &check;
-  <br><br>
-  - Recaudo &cross;
-    - De aportes &check;
-    - De ahorro contractual &cross;
-    - De ahorro permanente &cross;
-    - CxC &cross;
-  <br><br>
-  - Salidas &cross;
-    - De CDAT &cross;
-    - De Ahorro contractual &cross;
-    - Salidas de aportes &cross;
-    - Salidas de ahorro permanente &cross;
-    - Salidas fondos sociales pasivos &cross;
-  <br><br>
-  - Oblicaciones financieras &cross;
-  - Creditos aprobados &cross;
-  - Gastos administrativos &cross;
-  - Recaudo y remanentes &cross;
-  - CxP &cross;
-  - Saldos de ahorro ordinario &cross;
+- Indice promedio de morosidad &check;
+- Indice promedio de morosidad pat &check;
+- Activos Liquidos &check;
+- R. cartera &check;
+  - Consumo ventanilla &check;
+  - Consumo libranza &check;
+  - Comercial &check;
+  - Microcredito &check;
+  - Vivienda ventanilla &check;
+  - Vivienda libranza &check;
+    <br><br>
+    
+- Recaudo &check;
+  - De aportes &check;
+  - De ahorro contractual &check;
+  - De ahorro permanente &check;
+  - CxC &check;
+    <br><br>
+- Salidas &cross;
+  - De CDAT &check;
+  - De Ahorro contractual &check;
+  - Salidas de aportes &cross;
+  - Salidas de ahorro permanente &cross;
+  - Salidas fondos sociales pasivos &cross;
+    <br><br>
+    
+- Oblicaciones financieras &check;
+- Creditos aprobados &check;
+- Gastos administrativos &check;
+- Recaudo y remanentes &cross;
+- CxP &cross;
+- Saldos de ahorro ordinario &cross;

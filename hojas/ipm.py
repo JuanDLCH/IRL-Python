@@ -72,12 +72,6 @@ def ipm(fecha: Fecha, primeraVez, desviacionEstandar, wb: xw.Book):
         #SaldoTotal
         ws.range('D' + str(fila)).value = saldoTotal
 
-        ws.range("E9:F9").api.AutoFill(ws.range("E9:F{row}".format(row=fila)).api, 0 )
-        ws.range('B8:F' + str(fila)).api.Borders(11).LineStyle = 1 #Linea Vertical
-        ws.range('B8:F' + str(fila + 1)).api.Borders(12).LineStyle = 1 #Linea Horizontal
-        # Cambiar fuente
-        ws.range('B9:F' + str(fila)).api.Font.Name = 'Verdana'
-
 
 
 def ipmpat(fecha: Fecha, primeraVez, wb: xw.Book):
@@ -127,11 +121,6 @@ def ipmpat(fecha: Fecha, primeraVez, wb: xw.Book):
         ws.range('C' + str(fila)).value = morosos
         #SaldoTotal
         ws.range('D' + str(fila)).value = saldoTotal
-
-        ws.range("E9:F9").api.AutoFill(ws.range("E9:F{row}".format(row=fila)).api, 0 )
-
-        ws.range('B8:F' + str(fila)).api.Borders(11).LineStyle = 1 #Linea Vertical
-        ws.range('B8:F' + str(fila + 1)).api.Borders(12).LineStyle = 1 #Linea Horizontal
 
 
 

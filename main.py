@@ -1,11 +1,12 @@
 import os
-from tkinter import *
-from tkinter import messagebox
 import datetime
 from datetime import datetime
 from pandas import ExcelFile
 from hojas.ipm import ipm, ipmpat
+from hojas.obligacionesFinancieras import obligacionesFinancieras
 from hojas.recaudoAportes import recaudoAportes
+from hojas.recaudoac import recaudoac
+from hojas.recaudoap import recaudoap
 from utils.desviacionEstandar import desviacionEstandar
 from utils.fecha import *
 import xlwings as xw
@@ -14,9 +15,11 @@ from xlwings import App
 from utils.validaciones import *
 from hojas.cartera import diligenciarCarteras
 from hojas.ipm import ipm
-import sys
 from hojas.activosLiquidos import activosLiquidos
-from PyQt5 import QtWidgets# Create an instance of our class
+from hojas.cxc import cxc
+from hojas.salidas import salidaCdatyAC
+from hojas.creditosAprobados import creditosAprobados
+from hojas.gastosAdministrativos import gastosAdministrativos
 
 carpetas = [
     'CATALOGO DE CUENTAS',
@@ -54,6 +57,8 @@ def main(mes, anio, primeraVez):
 
     # Abrir el plano
     print('Abriendo plano. . .')
+
+    
     wb = xw.Book(plano)
     print('Iniciando sesion. . .')
     planoInvisible = wb.macro('Visibility.makeInvisible') 
@@ -67,7 +72,14 @@ def main(mes, anio, primeraVez):
     ipmpat(fecha, primeraVez, wb)
     activosLiquidos(fecha, primeraVez, wb)
     recaudoAportes(fecha, primeraVez, wb)
-
+    recaudoac(fecha, primeraVez, wb)
+    recaudoap(fecha,primeraVez,wb)
+    cxc(fecha, primeraVez, wb)
+    salidaCdatyAC(fecha, primeraVez, wb)
+    obligacionesFinancieras(fecha, primeraVez, wb)
+    creditosAprobados(fecha, wb)
+    gastosAdministrativos(fecha, primeraVez, wb)
+    wb.api.RefreshAll()
     print('Guardando plano. . .')
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
 
