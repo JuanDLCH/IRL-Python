@@ -26,6 +26,6 @@ def salidasfsp(fecha: Fecha, wb: xw.Book):
 
     ws.range('B13').value = saldo 
     ws.range('A13').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
-    ws.range('B5').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia,fecha.add_months(13-int(mes)).add_days(-1).mes,fecha.add_years(1).anio)
-    ws.range('C5').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia,fecha.add_months(2).add_days(-1).mes,fecha.anio)
-    ws.range('D5').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia,fecha.add_months(3).add_days(-1).mes,fecha.anio)
+    ws.range('B6').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia,fecha.add_months(13-int(mes)).add_days(-1).mes,fecha.add_years(1).anio)
+    ws.range('C6').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia,fecha.add_months(2).add_days(-1).mes,fecha.anio)
+    ws.range('D6').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia,fecha.add_months(3).add_days(-1).mes,fecha.anio)

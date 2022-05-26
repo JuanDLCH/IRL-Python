@@ -15,17 +15,19 @@ def salidasap(fecha: Fecha, wb: xw.Book):
     ws = wb.sheets['Salida de Ahorro Permanente']
     mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
     dia = fecha.add_months(1).add_days(-1).dia
-
     tabla = pd.read_csv(archivo, usecols=['NIT'], encoding='ANSI', sep=';', skiprows=3)
     NAsociadosMesEstudio = tabla.size
     
 
+    fechasmespasado = fecha.add_months(-1)
+    archivos = os.listdir(rutaRobot + '/Archivos/' + doc)
+    archivo = [archivo for archivo in archivos if fechasmespasado.as_Text() in archivo][0]
+    archivo = os.path.join(rutaRobot + '/Archivos/' + doc, archivo)
+    tablaP = pd.read_csv(archivo, usecols=['NIT'], encoding='ANSI', sep=';', skiprows=3)
+    NAsociadosMesAnterior = tablaP.size
+
+    TotalAsocioadosRetirados = NAsociadosMesAnterior -NAsociadosMesEstudio
 
 
-
-    #fechasmespasado = '{}/{}/{}'.format(dia, fecha.add_months(-1).mes, fecha.anio)
-    #archivos = os.listdir(rutaRobot + '/Archivos/' + doc)
-    #archivo = [archivo for archivo in archivos if fechasmespasado.as_Text() in archivo][0]
-    #archivo = os.path.join(rutaRobot + '/Archivos/' + doc, archivo)
-
+    
 
