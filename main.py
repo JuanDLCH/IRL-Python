@@ -7,6 +7,7 @@ from hojas.obligacionesFinancieras import obligacionesFinancieras
 from hojas.recaudoAportes import recaudoAportes
 from hojas.recaudoac import recaudoac
 from hojas.recaudoap import recaudoap
+from hojas.salidasap import salidasap
 from utils.desviacionEstandar import desviacionEstandar
 from utils.fecha import *
 import xlwings as xw
@@ -20,6 +21,7 @@ from hojas.cxc import cxc
 from hojas.salidas import salidaCdatyAC
 from hojas.creditosAprobados import creditosAprobados
 from hojas.gastosAdministrativos import gastosAdministrativos
+from hojas.salidasfsp import salidasfsp
 
 carpetas = [
     'CATALOGO DE CUENTAS',
@@ -79,6 +81,8 @@ def main(mes, anio, primeraVez):
     obligacionesFinancieras(fecha, primeraVez, wb)
     creditosAprobados(fecha, wb)
     gastosAdministrativos(fecha, primeraVez, wb)
+    salidasfsp(fecha,wb)
+    salidasap(fecha,wb)
     wb.api.RefreshAll()
     print('Guardando plano. . .')
     wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
