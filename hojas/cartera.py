@@ -32,6 +32,7 @@ def obtenerTabla(fecha: Fecha):
                 'TasaInteresEfectiva', 'AlturaCuota', 'ValorCuotaFija', 'Amortizacion']
 
     archivos = os.listdir(rutaRobot + '/Archivos/' + carpeta)
+    print(fecha.as_Text())
     archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
     archivo = os.path.join(rutaRobot + '/Archivos/' + carpeta, archivo)
 

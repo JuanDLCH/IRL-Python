@@ -1,3 +1,4 @@
+from base64 import encode
 from tkinter import messagebox
 import pandas as pd
 import os
@@ -30,7 +31,13 @@ def convertiracsv():
 
             os.remove(rutaRobot + '/ArchivosNuevos/' + archivo)
             nombre = archivo.split('.')[0].replace('_', ' ')
-            df.to_csv(rutaRobot + '/ArchivosNuevos/' + nombre + '.csv', index = None, header=True, encoding='ANSI', sep=';')
+            try:
+                df.to_csv(rutaRobot + '//ArchivosNuevos//' + nombre + '.csv', index = None, header=True, encoding='ANSI', sep=';')
+            except:
+                try:
+                    df.to_csv(rutaRobot + '//ArchivosNuevos//' + nombre + '.csv', index = None, header=True, encoding='ANSI', sep=';')
+                except:
+                    print("Error al convertir " + archivo)
         else:
             nombreArchivo = archivo.replace('CSV', 'csv')
             # Renombrar archivo

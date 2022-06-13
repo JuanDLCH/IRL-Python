@@ -48,7 +48,12 @@ def main(mes, anio, primeraVez):
     start_time = datetime.now()  
 
     path = resource_path('planoirl.xlsm')
-    plano = ExcelFile(path)
+
+    if primeraVez:
+        plano = ExcelFile(path)
+    else:
+        mesPlano = meses.index(mes.upper())
+        plano = ExcelFile(buscarPlano(mesPlano, anio))
 
     fecha = Fecha(1, meses.index(mes.upper()) + 1, anio)
     print(fecha.as_String())
@@ -60,8 +65,15 @@ def main(mes, anio, primeraVez):
     # Abrir el plano
     print('Abriendo plano. . .')
 
-    
-    wb = xw.Book(plano)
+    try:
+        wb = xw.Book(plano)
+    except Exception as e:
+        print(e)
+        print('No se pudo abrir el plano, es posible que ya haya uno con el mismo nombre abierto, cierrelo e intentelo de nuevo')
+        # Ejecutar ui.py
+        os.system('python ui.py')
+        exit()
+        
     print('Iniciando sesion. . .')
     planoInvisible = wb.macro('Visibility.makeInvisible') 
     planoVisible = wb.macro('Visibility.makeVisible')
@@ -85,10 +97,15 @@ def main(mes, anio, primeraVez):
     salidasap(fecha,wb)
     wb.api.RefreshAll()
     print('Guardando plano. . .')
-    wb.save(rutaRobot + '/PlanosDiligenciados/planoirl.xlsm')
-
+    try:
+        wb.save(rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsm'.format(mes, anio))
+    except:
+        print('Error al guardar el plano, es posible que ya haya un plano con este nombre abierto, por favor cierrelo.')
     # Terminar el cronometro
     end_time = datetime.now()
     print('Tiempo de ejecucion: {}'.format(end_time - start_time))
+
+    wb = xw.Book(rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsm'.format(mes, anio))
+    planoVisible = wb.macro('Visibility.makeVisible')
 
     planoVisible()

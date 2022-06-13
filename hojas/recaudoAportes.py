@@ -31,11 +31,12 @@ def recaudoAportes(fecha: Fecha, primeraVez: bool, wb: xw.Book):
             fecha = fecha.add_months(1)
             fecha.setDay(1)
     else:
-        archivo = rutaRobot + '/Archivos/INFORME INDIVIDUAL DE APORTES O CONTRIBUCIONES/' + fecha.as_Text() + '.csv'
-        tabla = pd.read_csv(archivo, usecols=['Saldo a fecha'])
+        archivo = rutaRobot + '/Archivos/INFORME INDIVIDUAL DE APORTES O CONTRIBUCIONES/INFORME INDIVIDUAL DE APORTES O CONTRIBUCIONES ' + fecha.as_Text() + '.csv'
+        tabla = pd.read_csv(archivo, usecols=['Saldo a fecha'], encoding='ANSI', sep=';', skiprows=3)
         total = tabla['Saldo a fecha'].sum()
 
-        fila = ws.range('A13:A').end('down').row
+        # Obtener la siguiente fila en blanco de la columna A
+        fila = ws.range('A' + str(ws.api.UsedRange.Rows.Count)).end('down').row
 
         #Fechas
         fecha = fecha.add_months(1)
@@ -43,8 +44,6 @@ def recaudoAportes(fecha: Fecha, primeraVez: bool, wb: xw.Book):
         mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
         ws.range('A' + str(fila)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
         ws.range('B' + str(fila)).value = total
-
-        ws.range("C37:I37").api.AutoFill(ws.range("C37:F{row}".format(row=fila)).api, 0 )
 
         fecha = fecha.add_months(1)
         fecha.setDay(1)
