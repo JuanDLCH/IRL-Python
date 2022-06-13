@@ -2,6 +2,8 @@ import os
 from PyQt5.QtWidgets import QMessageBox
 import sys
 from utils.fecha import *
+import wget
+desviacion = ""
 
 fechaActual = Fecha(1, datetime.now().month, datetime.now().year)
 # Obtener ruta de la carpeta documentos
@@ -40,3 +42,4 @@ def descargarArchivo(url, nombre):
         print('Error: ' + str(e.code))
         QMessageBox.critical(None, 'Error', 'Error: ' + str(e.code))
         return False
+    

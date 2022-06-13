@@ -1,4 +1,3 @@
-from numbers import Rational
 from PyQt5 import uic, QtWidgets, QtCore
 from PyQt5.QtWidgets import *
 import datetime
@@ -21,7 +20,6 @@ class Ui(QtWidgets.QDialog):
 
         btnFolder = self.findChild(QPushButton, 'btnFolder')
         btnFolder.clicked.connect(self.folder)
-
 
         self.inputMes = self.findChild(QComboBox, 'inputMes')
         # Poner lista de meses en el combobox
@@ -58,7 +56,9 @@ class Ui(QtWidgets.QDialog):
             print('Mes: ' + mes + ' Año: ' + str(anio) + ' Primera vez: ' + str(self.primerraVez.isChecked()))
             self.hide()
             main(mes, anio, self.primerraVez.isChecked())
-            self.print_message('¡Listo!')
+             # MessageBox
+            messagebox.showinfo(
+                'RobotIRL', 'Listo!' )
             self.show()
 
         

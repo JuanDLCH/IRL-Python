@@ -31,6 +31,14 @@ Nos apoyamos de algunas liberías disponibles para Python con el fin de procesar
    pip install xlwings
    pip install openpyxl
   ```
+
+- ### xlrd
+  
+  Para leer archivos de excel viejos, usamos esta librería.
+
+  ```python
+   pip install xlrd
+  ```
 - ### PyQt5
 
   Usamos PyQt5 para integrar la interfaz de usuario diseñada previamente con Qt Designer.
@@ -45,6 +53,13 @@ Nos apoyamos de algunas liberías disponibles para Python con el fin de procesar
 - ### Sys
 
   Usamos esta libería principalmente para acceder a rutas temporales del sistema donde nuestro ejecutable desempaqueta el plano para trabajarlo, ya que la intención es que el usuario no tenga que lidiar dándole este archivo al robot.
+- ### Wget
+
+  Usamos esta librería para conectar con algunos archivos de internet, como la desviación estándar.
+
+- ### Tkinter
+  
+  Esta libreria la usamos para mostrar algunos "MessageBox" que nos ayudan a mostrar mensajes sencillos al usuario.
 
 # Entradas y Salidas
 
@@ -68,28 +83,29 @@ La propia interfaz se encargará de decirle al usuario si hay un error en el ing
 - Indice promedio de morosidad pat &check;
 - Activos Liquidos &check;
 - R. cartera &check;
+
   - Consumo ventanilla &check;
   - Consumo libranza &check;
   - Comercial &check;
   - Microcredito &check;
   - Vivienda ventanilla &check;
   - Vivienda libranza &check;
-    <br><br>
-    
+    `<br><br>`
 - Recaudo &check;
+
   - De aportes &check;
   - De ahorro contractual &check;
   - De ahorro permanente &check;
   - CxC &check;
-    <br><br>
+    `<br><br>`
 - Salidas &cross;
+
   - De CDAT &check;
   - De Ahorro contractual &check;
   - Salidas de aportes &cross;
   - Salidas de ahorro permanente &cross;
-  - Salidas fondos sociales pasivos &cross;
-    <br><br>
-    
+  - Salidas fondos sociales pasivos &check;
+    `<br><br>`
 - Oblicaciones financieras &check;
 - Creditos aprobados &check;
 - Gastos administrativos &check;

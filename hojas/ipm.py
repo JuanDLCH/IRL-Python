@@ -16,6 +16,11 @@ def ipm(fecha: Fecha, primeraVez, desviacionEstandar, wb: xw.Book):
     print('Diligenciando Indice promedio de morosidad. . .')
     ws = wb.sheets['Índice promedio de morosidad ']
     ws.range('I7').value = desviacionEstandar
+    # Poner la fecha recibida en la celda C6
+    mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
+    # Ultimo dia del mes
+    dia = fecha.add_months(1).add_days(-1).dia
+    ws.range('C6').value = str(dia) + '/' + str(mes) + '/' + str(fecha.anio)
     if primeraVez:
         fecha = fecha.add_months(-12)
         for i in range(13):
@@ -113,9 +118,10 @@ def ipmpat(fecha: Fecha, primeraVez, wb: xw.Book):
         mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
         ws.range('B' + str(fila)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
         # Obtener tabla
-        tabla = pd.read_csv(archivo, usecols=['SaldoTotal', 'Número Meses de Incumplimiento'], encoding='ANSI', sep=';')
+        tabla = pd.read_csv(archivo, usecols=['SaldoTotal', 'Número Meses de Incumplimiento'], encoding='ANSI', sep=';', skiprows=3)
         saldoTotal = tabla['SaldoTotal'].sum()
-        morosos = tabla.loc[tabla['Número Meses de Incumplimiento'] > 1].sum()
+        tabla = tabla.loc[tabla['Número Meses de Incumplimiento'] > 1]
+        morosos = tabla['Número Meses de Incumplimiento'].sum()
 
         #SaldoCapital
         ws.range('C' + str(fila)).value = morosos

@@ -67,9 +67,8 @@ def desviacionEstandar(fecha: datetime):
             try:
                 if os.path.exists(rutaRobot + '/Desviacion-estandar ' + fechaActual.as_Text().lower() + '.xlsx'):
                     found = True
-                else:
-                    wget.download(url + fechaActual.as_Text().lower().replace(' ', '_') + '.xlsx',
-                                    rutaRobot + '/Desviacion-estandar ' + fechaActual.as_Text().lower() + '.xlsx')
+                else:                
+                    desviacion = pd.read_excel(url + fechaActual.as_Text().lower().replace(' ', '_') + '.xlsx')
                     found = True
             except:
                 pass
