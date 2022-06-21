@@ -7,6 +7,7 @@ from hojas.obligacionesFinancieras import obligacionesFinancieras
 from hojas.recaudoAportes import recaudoAportes
 from hojas.recaudoac import recaudoac
 from hojas.recaudoap import recaudoap
+from hojas.salidasao import salidasao
 from hojas.salidasap import salidasap
 from utils.desviacionEstandar import desviacionEstandar
 from utils.fecha import *
@@ -22,7 +23,8 @@ from hojas.salidas import salidaCdatyAC
 from hojas.creditosAprobados import creditosAprobados
 from hojas.gastosAdministrativos import gastosAdministrativos
 from hojas.salidasfsp import salidasfsp
-
+from hojas.recaudoyremanentes import recaudoyremanentes
+from hojas.cxp import cxp
 carpetas = [
     'CATALOGO DE CUENTAS',
     'CREDITOS DE BANCOS Y OTRAS OBLIGACIONES FINANCIERAS (NUEVO)',
@@ -95,6 +97,9 @@ def main(mes, anio, primeraVez):
     gastosAdministrativos(fecha, primeraVez, wb)
     salidasfsp(fecha,wb)
     salidasap(fecha,wb)
+    recaudoyremanentes(fecha,wb)
+    cxp(fecha,wb)
+    salidasao(fecha,wb)
     wb.api.RefreshAll()
     print('Guardando plano. . .')
     try:
