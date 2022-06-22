@@ -21,7 +21,7 @@ def salidasap(fecha: Fecha, wb: xw.Book):
     dia = fecha.add_months(1).add_days(-1).dia
     tabla = pd.read_csv(archivo, usecols=['NIT','Saldo'], encoding='ANSI', sep=';', skiprows=3)
     tablaAux = tabla.drop(columns='Saldo')
-   
+    NAsociadosMesEstudio = tabla.size
     fechasmespasado = fecha.add_months(-1)
     archivos = os.listdir(rutaRobot + '/Archivos/' + doc)
     archivo = [archivo for archivo in archivos if fechasmespasado.as_Text() in archivo][0]
@@ -40,22 +40,6 @@ def salidasap(fecha: Fecha, wb: xw.Book):
     print(resultado2.size)
     print(resultado2)
    # print(saldo)
-    
-
-
-    
-
-
-
-
-
-   
-
-
-
     #TotalAsocioadosRetirados = NAsociadosMesAnterior -NAsociadosMesEstudio
-
-
-
-    
-
+    NAsociadosMesAnterior = tablaP.size
+    TotalAsocioadosRetirados = NAsociadosMesAnterior -NAsociadosMesEstudio
