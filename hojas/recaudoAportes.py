@@ -4,6 +4,7 @@ from xlwings import *
 from utils.fecha import *
 import os
 from utils.globals import rutaRobot
+from PyQt5.QtWidgets import *
 
 carpeta = 'INFORME INDIVIDUAL DE APORTES O CONTRIBUCIONES'
 
@@ -18,7 +19,15 @@ def recaudoAportes(fecha: Fecha, primeraVez: bool, wb: xw.Book):
         for i in range(25):
             archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
             archivo = os.path.join(rutaRobot + '/Archivos/INFORME INDIVIDUAL DE APORTES O CONTRIBUCIONES/', archivo)
-            tabla = pd.read_csv(archivo, skiprows=3, usecols=['Saldo a fecha'], encoding='ANSI', sep=';')
+            try:
+                tabla = pd.read_csv(archivo, skiprows=3, usecols=['Saldo a fecha'], encoding='ANSI', sep=';')
+            except:
+                QMessageBox.warning(None, 'Error', 'No se pudo leer el archivo {} {}, por favor pongalo en la carpeta ArchivosNuevos'.format(carpeta, fecha.as_Text()))
+                os.remove(archivo)
+                os.system('explorer ' + rutaRobot + '\ArchivosNuevos')
+                os.system('python ui.py')
+                exit()
+
             total = tabla['Saldo a fecha'].sum()
 
             #Fechas

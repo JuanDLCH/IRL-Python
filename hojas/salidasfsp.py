@@ -14,6 +14,8 @@ Mes30 = [4, 6, 9, 11]
 
 def salidasfsp(fecha: Fecha, wb: xw.Book):
     print('Diligenciando Salidas fondos sociales pasivos. . .')
+    ultimoDia = fecha.add_months(1).add_days(-1).dia
+    mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
    
     archivos = os.listdir(rutaRobot + '/Archivos/' + doc)
     archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
@@ -39,20 +41,7 @@ def salidasfsp(fecha: Fecha, wb: xw.Book):
         ws.range('A' + str(ultimaFilaSaldo + 1)).value = '{}/{}/{}'.format(dia, mes, fecha.anio)   
         ws.range('B' + str(ultimaFilaFecha + 1)).value = saldo 
 
-    if fecha.mes in Mes30:
 
-        ws.range('B6').value = '{}/{}/{}'.format(fecha.add_days(-1).dia,fecha.add_months(13-int(mes)).add_days(-1).mes,fecha.anio)
-        ws.range('C6').value = '{}/{}/{}'.format(fecha.add_days(-1).dia,fecha.add_months(2).add_days(-1).mes,fecha.anio)
-        ws.range('D6').value = '{}/{}/{}'.format(fecha.add_days(-1).dia,fecha.add_months(3).add_days(-1).mes,fecha.anio)
-
-    else : 
-        ws.range('B6').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia,fecha.add_months(13-int(mes)).add_days(-1).mes,fecha.anio)
-        ws.range('C6').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia,fecha.add_months(2).add_days(-1).mes,fecha.anio)
-        ws.range('D6').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia,fecha.add_months(3).add_days(-1).mes,fecha.anio)
-
-        
-
-    
-    
-    
-   
+        ws.range('B6').value = '{}/{}/{}'.format(31,fecha.add_months(13-int(mes)).add_days(-1).mes,fecha.anio)
+        ws.range('C6').value = '{}/{}/{}'.format(fecha.add_months(2).add_days(-1).dia,fecha.add_months(2).add_days(-1).mes,fecha.anio)
+        ws.range('D6').value = '{}/{}/{}'.format(fecha.add_months(3).add_days(-1).dia,fecha.add_months(3).add_days(-1).mes,fecha.anio)

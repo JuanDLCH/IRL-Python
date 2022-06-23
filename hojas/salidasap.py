@@ -35,11 +35,21 @@ def salidasap(fecha: Fecha, wb: xw.Book):
     resultado1 = tablaAuxP[~tablaAuxP.apply(tuple,1).isin(tablaAux.apply(tuple,1))]
     resultado2 = resultado1.drop_duplicates(subset='NIT')
 
+    tablaAuxP = tablaP
+    #Filtrar en tablaAuxP los NIT que estan en resultado2
+    tablaAuxP = tablaAuxP[tablaAuxP['NIT'].isin(resultado2['NIT'])]
+
+
+    # Sumar el saldo de tablaAuxP
+    saldo = tablaAuxP.sum()['Saldo']
+
     #saldo = resultado2[tabla['Saldo'].sum()]
     #totalretirados = resultado1.size
     print(resultado2.size)
     print(resultado2)
-   # print(saldo)
+    print(saldo)
     #TotalAsocioadosRetirados = NAsociadosMesAnterior -NAsociadosMesEstudio
     NAsociadosMesAnterior = tablaP.size
-    TotalAsocioadosRetirados = NAsociadosMesAnterior -NAsociadosMesEstudio
+    TotalAsocioadosRetirados = NAsociadosMesAnterior - NAsociadosMesEstudio
+
+    # 
