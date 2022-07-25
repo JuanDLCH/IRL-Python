@@ -95,7 +95,7 @@ def main(mes, anio, primeraVez):
     cxp(fecha,wb) 
     recaudoyremanentes(fecha,wb)
     obligacionesFinancieras(fecha, primeraVez, wb)
-    creditosAprobados(fecha, wb)
+    creditosAprobados(fecha,primeraVez, wb)
     gastosAdministrativos(fecha, primeraVez, wb)
     salidaCdatyAC(fecha, primeraVez, wb)
     salidasfsp(fecha,wb)

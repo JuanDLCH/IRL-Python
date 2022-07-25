@@ -35,7 +35,7 @@ def gastosAdministrativos(fecha: Fecha, primeraVez: bool, wb: xw.Book):
             fecha = fecha.add_months(1)
     else:
         ultimafila = ws.range('A10').end('down').row
-        ws.range('A' + str(ultimafila)).value = '{}/{}/{}'.format(dia, mes, fecha.anio)
+        ws.range('A' + str(ultimafila + 1)).value = '{}/{}/{}'.format(dia, mes, fecha.anio)
         archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
         archivo = os.path.join(rutaRobot + '/Archivos/' + doc + '/', archivo)
         tabla = pd.read_csv(archivo, skiprows=3, usecols=['CUENTA', 'Saldo'], encoding='ANSI', sep=';')
@@ -45,8 +45,8 @@ def gastosAdministrativos(fecha: Fecha, primeraVez: bool, wb: xw.Book):
         gastosBeneficios = tabla[tabla['CUENTA'] == 510500]['Saldo'].sum()
         gastosGenerales = tabla[tabla['CUENTA'] == 511000]['Saldo'].sum()
 
-        ws.range('B' + str(ultimafila)).value = gastosBeneficios
-        ws.range('C' + str(ultimafila)).value = gastosGenerales
+        ws.range('B' + str(ultimafila + 1)).value = gastosBeneficios
+        ws.range('C' + str(ultimafila + 1)).value = gastosGenerales
 
 
 

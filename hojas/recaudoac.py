@@ -34,7 +34,7 @@ def recaudoac(fecha: Fecha, primeraVez: bool , wb: xw.Book):
         mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
         dia = fecha.add_months(1).add_days(-1).dia
         ultimaFila = ws.range('A' + str(ws.api.UsedRange.Rows.Count)).end('up').row
-        ws.range('A' + str(ultimaFila + 1)).value = '{}/{}/{}'.format(fecha.dia, mes, fecha.anio)
+        ws.range('A' + str(ultimaFila + 1)).value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
         archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
         archivo = os.path.join('{}/Archivos/{}'.format(rutaRobot, doc), archivo)
 

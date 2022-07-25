@@ -8,7 +8,7 @@ from utils.globals import rutaRobot
 hoja = 'Creditos Aprobados'
 doc = 'CATALOGO DE CUENTAS'
 
-def creditosAprobados(fecha: Fecha, wb: xw.Book):
+def creditosAprobados(fecha: Fecha, primeraVez:bool, wb: xw.Book):
     print('Diligenciando Creditos Aprobados. . .')
     archivos = os.listdir(rutaRobot + '/Archivos/' + doc)
     archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
@@ -20,7 +20,6 @@ def creditosAprobados(fecha: Fecha, wb: xw.Book):
     ws.range('B5').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
 
     ultimaFila = ws.range('A9').end('down').row
-    ws.range('A' + str(ultimaFila)).value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
 
     tabla = pd.read_csv(archivo, skiprows=3, usecols=['CUENTA', 'Saldo'], encoding='ANSI', sep=';')
 
@@ -30,7 +29,12 @@ def creditosAprobados(fecha: Fecha, wb: xw.Book):
     except:
         saldo = 0
 
-    ws.range('B' + str(ultimaFila)).value = saldo
+    if primeraVez: 
+        ws.range('A' + str(ultimaFila)).value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
+        ws.range('B' + str(ultimaFila)).value = saldo
+    else : 
+        ws.range('A' + str(ultimaFila + 1)).value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
+        ws.range('B' + str(ultimaFila + 1)).value = saldo
 
 
     # No se pudo escribir la formula, procedimos a cambiarla por BUSCARV

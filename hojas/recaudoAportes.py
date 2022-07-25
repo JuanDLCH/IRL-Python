@@ -36,6 +36,7 @@ def recaudoAportes(fecha: Fecha, primeraVez: bool, wb: xw.Book):
             mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
             ws.range('A' + str(i + 13)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
             ws.range('B' + str(i + 13)).value = total
+        
 
             fecha = fecha.add_months(1)
             fecha.setDay(1)
@@ -45,14 +46,16 @@ def recaudoAportes(fecha: Fecha, primeraVez: bool, wb: xw.Book):
         total = tabla['Saldo a fecha'].sum()
 
         # Obtener la siguiente fila en blanco de la columna A
-        fila = ws.range('A' + str(ws.api.UsedRange.Rows.Count)).end('down').row
-
+        ultimaFilaFecha = ws.range('A' + str(ws.api.UsedRange.Rows.Count)).end('up').row
+        ultimaFilaSaldo = ws.range('B' + str(ws.api.UsedRange.Rows.Count)).end('up').row
         #Fechas
         fecha = fecha.add_months(1)
         fecha = fecha.add_days(-1)
         mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
-        ws.range('A' + str(fila)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
-        ws.range('B' + str(fila)).value = total
+        ws.range('A' + str(ultimaFilaFecha + 1)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
+        ws.range('B' + str(ultimaFilaSaldo + 1)).value = total
+        #ws.range('A38').value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
+        #ws.range('B38').value = total
 
         fecha = fecha.add_months(1)
         fecha.setDay(1)
