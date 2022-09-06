@@ -82,6 +82,10 @@ def ipm(fecha: Fecha, primeraVez, desviacionEstandar, wb: xw.Book):
 def ipmpat(fecha: Fecha, primeraVez, wb: xw.Book):
     print('Diligenciando Indice promedio de morosidad pat. . .')
     ws = wb.sheets['Índice promedio de morosida Pat']
+    dia = fecha.add_months(1).add_days(-1).dia
+    mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
+    ws.range('B5').value = '{}/{}/{}'.format(dia,mes, fecha.anio)
+
     if primeraVez:
         fecha = fecha.add_months(-12)
         for i in range(13):
