@@ -1,7 +1,6 @@
 import xlwings as xw
 from xlwings import *
 from utils.fecha import *
-import openpyxl
 import os
 import pandas as pd
 from utils.globals import rutaRobot

@@ -18,7 +18,7 @@ def gastosAdministrativos(fecha: Fecha, primeraVez: bool, wb: xw.Book):
         for i in range(13):
             mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
             dia = fecha.add_months(1).add_days(-1).dia
-            ws.range('A' + str(i + 11)).value = '{}/{}/{}'.format(dia, mes, fecha.anio)
+            ws.range('A' + str(i + 16)).value = '{}/{}/{}'.format(dia, mes, fecha.anio)
 
             archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
             archivo = os.path.join(rutaRobot + '/Archivos/' + doc + '/', archivo)
@@ -29,8 +29,8 @@ def gastosAdministrativos(fecha: Fecha, primeraVez: bool, wb: xw.Book):
             gastosBeneficios = tabla[tabla['CUENTA'] == 510500]['Saldo'].sum()
             gastosGenerales = tabla[tabla['CUENTA'] == 511000]['Saldo'].sum()
 
-            ws.range('B' + str(i + 11)).value = gastosBeneficios
-            ws.range('C' + str(i + 11)).value = gastosGenerales
+            ws.range('B' + str(i + 16)).value = gastosBeneficios
+            ws.range('C' + str(i + 16)).value = gastosGenerales
 
             fecha = fecha.add_months(1)
     else:

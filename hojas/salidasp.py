@@ -1,6 +1,5 @@
 from re import A
 import pandas as pd
-import numpy as np
 import xlwings as xw
 from xlwings import *
 from utils.fecha import *
@@ -11,14 +10,15 @@ def salidasp(fecha: Fecha, wb: xw.Book):
     print('Diligenciando Salidas de aportes. . .')
     doc = 'INFORME INDIVIDUAL DE APORTES O CONTRIBUCIONES'
 
-
+   
     archivos = os.listdir(rutaRobot + '/Archivos/' + doc)
     archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
     archivo = os.path.join(rutaRobot + '/Archivos/' + doc, archivo)
     ws = wb.sheets['Salida de Aportes']
     mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
     dia = fecha.add_months(1).add_days(-1).dia
-    
+    ws.range('B6').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
+
     tabla = pd.read_csv(archivo, usecols=['Número de identificación','Saldo a fecha'], encoding='ANSI', sep=';', skiprows=3)
     tablaAux = tabla.drop(columns='Saldo a fecha')
  

@@ -31,7 +31,7 @@ def salidasfsp(fecha: Fecha, wb: xw.Book):
     tabla = pd.read_csv(archivo, usecols=['CUENTA','Saldo'], encoding='ANSI', sep=';', skiprows=3)
     saldo = tabla[tabla['CUENTA'] == cuenta]['Saldo'].sum()
 
-    ws.range('B7').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
+    ws.range('B6').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
    
 
     if ws.range('A13').value == None : 
@@ -42,6 +42,6 @@ def salidasfsp(fecha: Fecha, wb: xw.Book):
         ws.range('B' + str(ultimaFilaFecha + 1)).value = saldo 
 
 
-        ws.range('B6').value = '{}/{}/{}'.format(31,fecha.add_months(13-int(mes)).add_days(-1).mes,fecha.anio)
-        ws.range('C6').value = '{}/{}/{}'.format(fecha.add_months(2).add_days(-1).dia,fecha.add_months(2).add_days(-1).mes,fecha.anio)
-        ws.range('D6').value = '{}/{}/{}'.format(fecha.add_months(3).add_days(-1).dia,fecha.add_months(3).add_days(-1).mes,fecha.anio)
+    ws.range('B5').value = '{}/{}/{}'.format(31,fecha.add_months(13-int(mes)).add_days(-1).mes,fecha.anio)
+    ws.range('C5').value = '{}/{}/{}'.format(fecha.add_months(2).add_days(-1).dia,fecha.add_months(2).add_days(-1).mes,fecha.anio)
+    ws.range('D5').value = '{}/{}/{}'.format(fecha.add_months(3).add_days(-1).dia,fecha.add_months(3).add_days(-1).mes,fecha.anio)

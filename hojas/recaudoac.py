@@ -44,6 +44,6 @@ def recaudoac(fecha: Fecha, primeraVez: bool , wb: xw.Book):
 
         ws.range('B' + str(ultimaFila + 1)).value = suma
     
-    ws.range('B6').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
+    ws.range('B8').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
 
 
