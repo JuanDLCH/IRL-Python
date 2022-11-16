@@ -46,8 +46,8 @@ def recaudoAportes(fecha: Fecha, primeraVez: bool, wb: xw.Book):
         total = tabla['Saldo a fecha'].sum()
 
         # Obtener la siguiente fila en blanco de la columna A
-        ultimaFilaFecha = ws.range('A' + str(ws.api.UsedRange.Rows.Count)).end('up').row
-        ultimaFilaSaldo = ws.range('B' + str(ws.api.UsedRange.Rows.Count)).end('up').row
+        ultimaFilaFecha = ws.range('A' + str(ws.api.UsedRange.Rows.Count+13)).end('up').row
+        ultimaFilaSaldo = ws.range('B' + str(ws.api.UsedRange.Rows.Count+13)).end('up').row
         #Fechas
         fecha = fecha.add_months(1)
         fecha = fecha.add_days(-1)

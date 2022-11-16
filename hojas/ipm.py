@@ -14,13 +14,13 @@ rutaRobot = os.path.join(rutaDocumentos, 'RobotIRL')
 
 def ipm(fecha: Fecha, primeraVez, desviacionEstandar, wb: xw.Book):
     print('Diligenciando Indice promedio de morosidad. . .')
-    ws = wb.sheets['Índice promedio de morosidad ']
-    ws.range('I7').value = desviacionEstandar
+    ws = wb.sheets['Índice promedio de morosidad']
+    #ws.range('I7').value = desviacionEstandar
     # Poner la fecha recibida en la celda C6
     mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
     # Ultimo dia del mes
     dia = fecha.add_months(1).add_days(-1).dia
-    ws.range('C6').value = str(dia) + '/' + str(mes) + '/' + str(fecha.anio)
+    #ws.range('C6').value = str(dia) + '/' + str(mes) + '/' + str(fecha.anio)
     if primeraVez:
         fecha = fecha.add_months(-12)
         for i in range(13):
@@ -42,26 +42,26 @@ def ipm(fecha: Fecha, primeraVez, desviacionEstandar, wb: xw.Book):
             fecha = fecha.add_months(1)
             fecha = fecha.add_days(-1)
             mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
-            ws.range('B' + str(i + 9)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
+            ws.range('A' + str(i + 13)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
 
             #SaldoCapital
             saldoMora = tabla['SaldoCapital'].sum()
-            ws.range('C' + str(i + 9)).value = saldoMora
+            ws.range('B' + str(i + 13)).value = saldoMora
 
             #SaldoTotal
-            ws.range('D' + str(i + 9)).value = saldoTotal
+            ws.range('C' + str(i + 13)).value = saldoTotal
 
             fecha = fecha.add_months(1)
             fecha.setDay(1)          
     else:
         archivo = os.path.join(rutaRobot + '/Archivos/INFORME INDIVIDUAL DE CARTERA DE CREDITO (MODIFICADO)/INFORME INDIVIDUAL DE CARTERA DE CREDITO (MODIFICADO) ' + fecha.as_Text() + '.csv')
         # Obtener la proxima fila disponiible en la columna B
-        fila = ws.range('B8').end('down').row + 1
+        fila = ws.range('A13').end('down').row + 1
 
         fecha = fecha.add_months(1)
         fecha = fecha.add_days(-1)
         mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
-        ws.range('B' + str(fila)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
+        ws.range('A' + str(fila)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
         # Obtener tabla
         tabla = pd.read_csv(archivo, skiprows=3, usecols=['CodigoContable', 'SaldoCapital'], encoding='ANSI', sep=';')
 
@@ -72,10 +72,10 @@ def ipm(fecha: Fecha, primeraVez, desviacionEstandar, wb: xw.Book):
 
         #SaldoCapital
         saldoMora = tabla['SaldoCapital'].sum()
-        ws.range('C' + str(fila)).value = saldoMora
+        ws.range('B' + str(fila)).value = saldoMora
 
         #SaldoTotal
-        ws.range('D' + str(fila)).value = saldoTotal
+        ws.range('C' + str(fila)).value = saldoTotal
 
 
 
@@ -105,9 +105,9 @@ def ipmpat(fecha: Fecha, primeraVez, wb: xw.Book):
             fecha = fecha.add_months(1)
             fecha = fecha.add_days(-1)
             mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
-            ws.range('B' + str(i + 9)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
-            ws.range('C' + str(i + 9)).value = morosos
-            ws.range('D' + str(i + 9)).value = saldoTotal
+            ws.range('A' + str(i + 15)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
+            ws.range('B' + str(i + 15)).value = morosos
+            ws.range('C' + str(i + 15)).value = saldoTotal
 
             fecha = fecha.add_months(1)
             fecha.setDay(1)    
@@ -115,12 +115,12 @@ def ipmpat(fecha: Fecha, primeraVez, wb: xw.Book):
     else:
         archivo = rutaRobot + '/Archivos/INFORME DEUDORES PATRONALES Y EMPRESAS/INFORME DEUDORES PATRONALES Y EMPRESAS ' + fecha.as_Text() + '.csv'
         # Obtener la proxima fila disponiible en la columna B
-        fila = ws.range('B8').end('down').row + 1
+        fila = ws.range('A15').end('down').row + 1
 
         fecha = fecha.add_months(1)
         fecha = fecha.add_days(-1)
         mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
-        ws.range('B' + str(fila)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
+        ws.range('A' + str(fila)).value = str(fecha.dia) + '/' + str(mes) + '/' + str(fecha.anio)
         # Obtener tabla
         tabla = pd.read_csv(archivo, usecols=['SaldoTotal', 'Número Meses de Incumplimiento'], encoding='ANSI', sep=';', skiprows=3)
         saldoTotal = tabla['SaldoTotal'].sum()
@@ -128,9 +128,9 @@ def ipmpat(fecha: Fecha, primeraVez, wb: xw.Book):
         morosos = tabla['Número Meses de Incumplimiento'].sum()
 
         #SaldoCapital
-        ws.range('C' + str(fila)).value = morosos
+        ws.range('B' + str(fila)).value = morosos
         #SaldoTotal
-        ws.range('D' + str(fila)).value = saldoTotal
+        ws.range('C' + str(fila)).value = saldoTotal
 
 
 

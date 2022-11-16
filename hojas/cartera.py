@@ -27,8 +27,8 @@ carpeta = 'INFORME INDIVIDUAL DE CARTERA DE CREDITO (MODIFICADO)'
 
 
 def obtenerTabla(fecha: Fecha):
-    columnas = ['CodigoContable', 'NroCredito', 'ValorPrestamo', 'SaldoCapital', 'FechaDesembolsoInicial', 'FechaVencimiento',
-                'TasaInteresEfectiva', 'AlturaCuota', 'ValorCuotaFija', 'Amortizacion']
+    columnas = ['CodigoContable', 'NroCredito', 'FechaDesembolsoInicial','FechaVencimiento', 'AlturaCuota','Amortizacion',
+                'TasaInteresEfectiva', 'ValorPrestamo', 'ValorCuotaFija','SaldoCapital']
 
     archivos = os.listdir(rutaRobot + '/Archivos/' + carpeta)
     print(fecha.as_Text())
@@ -61,10 +61,13 @@ def filtrarTabla(tabla, fecha: Fecha, hoja):
 def diligenciarCarteras(wb: xw.Book, fecha: Fecha):
     tabla = obtenerTabla(fecha)
     fechaAux = fecha
+    dia = fecha.add_months(1).add_days(-1).dia
+    mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
     for hoja in hojas:
         print('Diligenciando ' + hoja + '. . .')
         tablaAux = filtrarTabla(tabla, fechaAux, hoja)
         ws = wb.sheets[hoja]
+        ws.range('B5').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
         # Eliminar datos desde A9 hasta la última fila
         ws.range('A9:I' + str(ws.range('J9').end('down').row)).clear()
         # Insertar datos sin encabezado

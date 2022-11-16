@@ -15,9 +15,9 @@ codigos = [
 ]
 
 columnas = [
-    'B', 'C', 'D', 'G', 'H', 'I', 
-    'L', 'M', 'N', 'O', 'P', 'Q', 
-    'R', 'S', 'T', 'U', 'V', 'W'
+    'A', 'B', 'C', 'E', 'F', 'G', 
+    'I', 'J', 'K', 'L', 'M', 'N', 
+    'O', 'P', 'Q', 'R', 'S', 'T'
 ]
 
 def activosLiquidos(fecha: Fecha, primeraVez, wb: xw.Book):
@@ -31,7 +31,7 @@ def activosLiquidos(fecha: Fecha, primeraVez, wb: xw.Book):
     tabla = pd.read_csv(archivo, usecols=['CUENTA', 'Saldo'], skiprows=3, encoding='ANSI', sep=';')
 
     mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
-    ws.range('C5').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
+    ws.range('B5').value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
 
     for col in columnas:
         saldo = tabla.loc[tabla['CUENTA'] == codigos[columnas.index(col)]]['Saldo']

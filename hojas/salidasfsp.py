@@ -34,7 +34,7 @@ def salidasfsp(fecha: Fecha, wb: xw.Book):
     ws.range('B6').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
    
 
-    if ws.range('A13').value == None : 
+    if ws.range('A12').value == None : 
         ws.range('A' + str(ultimaFilaSaldo)).value = '{}/{}/{}'.format(dia, mes, fecha.anio)  
         ws.range('B' + str(ultimaFilaFecha)).value = saldo  
     else : 
