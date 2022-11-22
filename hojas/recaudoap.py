@@ -21,15 +21,16 @@ def recaudoap(fecha: Fecha, primeraVez: bool , wb: xw.Book):
         for i in range(25):
             dia = fechaAux.add_months(1).add_days(-1).dia
             mes = '0' + str(fechaAux.mes) if fechaAux.mes < 10 else str(fechaAux.mes)
-            ws.range('A' + str(i + 11)).value = '{}/{}/{}'.format(dia, mes, fechaAux.anio)
+            ws.range('A' + str(i + 14)).value = '{}/{}/{}'.format(dia, mes, fechaAux.anio)
             archivo = [archivo for archivo in archivos if fechaAux.as_Text() in archivo][0]
             archivo = os.path.join('{}/Archivos/{}'.format(rutaRobot, doc), archivo)
 
             tabla = pd.read_csv(archivo, usecols=['CodigoContable', 'Saldo'], encoding='ANSI', sep=';', skiprows=3)
             tabla = tabla.loc[tabla['CodigoContable'].isin(cuentas)]
+        
             suma = tabla['Saldo'].sum()
 
-            ws.range('B' + str(i + 11)).value = suma
+            ws.range('B' + str(i + 14)).value = suma
 
             fechaAux = fechaAux.add_months(1)
     else:

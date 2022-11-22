@@ -9,9 +9,6 @@ doc = 'CATALOGO DE CUENTAS'
 
 cuenta = 260000
 
-Mes30 = [4, 6, 9, 11]
-
-
 def salidasfsp(fecha: Fecha, wb: xw.Book):
     print('Diligenciando Salidas fondos sociales pasivos. . .')
     ultimoDia = fecha.add_months(1).add_days(-1).dia
@@ -31,10 +28,10 @@ def salidasfsp(fecha: Fecha, wb: xw.Book):
     tabla = pd.read_csv(archivo, usecols=['CUENTA','Saldo'], encoding='ANSI', sep=';', skiprows=3)
     saldo = tabla[tabla['CUENTA'] == cuenta]['Saldo'].sum()
 
-    ws.range('B6').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
+    ws.range('B5').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
    
 
-    if ws.range('A12').value == None : 
+    if ws.range('A10').value == None : 
         ws.range('A' + str(ultimaFilaSaldo)).value = '{}/{}/{}'.format(dia, mes, fecha.anio)  
         ws.range('B' + str(ultimaFilaFecha)).value = saldo  
     else : 
@@ -42,6 +39,6 @@ def salidasfsp(fecha: Fecha, wb: xw.Book):
         ws.range('B' + str(ultimaFilaFecha + 1)).value = saldo 
 
 
-    ws.range('B5').value = '{}/{}/{}'.format(31,fecha.add_months(13-int(mes)).add_days(-1).mes,fecha.anio)
-    ws.range('C5').value = '{}/{}/{}'.format(fecha.add_months(2).add_days(-1).dia,fecha.add_months(2).add_days(-1).mes,fecha.anio)
-    ws.range('D5').value = '{}/{}/{}'.format(fecha.add_months(3).add_days(-1).dia,fecha.add_months(3).add_days(-1).mes,fecha.anio)
+    ws.range('B3').value = '{}/{}/{}'.format(31,fecha.add_months(13-int(mes)).add_days(-1).mes,fecha.anio)
+    ws.range('C3').value = '{}/{}/{}'.format(fecha.add_months(2).add_days(-1).dia,fecha.add_months(2).add_days(-1).mes,fecha.anio)
+    ws.range('D3').value = '{}/{}/{}'.format(fecha.add_months(3).add_days(-1).dia,fecha.add_months(3).add_days(-1).mes,fecha.anio)
