@@ -80,9 +80,6 @@ def main(mes, anio, primeraVez):
         
     print('Iniciando sesion. . .')
     planoInvisible = wb.macro('Visibility.makeInvisible') 
-    #planoVisible = wb.macro('Visibility.makeVisible')
-
-    #planoInvisible()
 
     #To do: Diligenciar carteras
     diligenciarCarteras(wb, fecha)
@@ -119,6 +116,3 @@ def main(mes, anio, primeraVez):
     print('Tiempo de ejecucion: {}'.format(end_time - start_time))
 
     wb = xw.Book(rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsx'.format(mes, anio))
-    #planoVisible = wb.macro('Visibility.makeVisible')
-
-    #planoVisible().
