@@ -26,6 +26,7 @@ from hojas.salidasfsp import salidasfsp
 from hojas.recaudoyremanentes import recaudoyremanentes
 from hojas.cxp import cxp
 from hojas.salidasp import salidasp
+from hojas.salidasp import salidasp
 carpetas = [
     'CATALOGO DE CUENTAS',
     'CREDITOS DE BANCOS Y OTRAS OBLIGACIONES FINANCIERAS (NUEVO)',
@@ -94,9 +95,12 @@ def main(mes, anio, primeraVez):
     cxc(fecha, primeraVez, wb)
     cxp(fecha,wb) 
     recaudoyremanentes(fecha,wb)
+    cxp(fecha,wb) 
+    recaudoyremanentes(fecha,wb)
     obligacionesFinancieras(fecha, primeraVez, wb)
     creditosAprobados(fecha,primeraVez, wb)
     gastosAdministrativos(fecha, primeraVez, wb)
+    salidaCdatyAC(fecha, primeraVez, wb)
     salidaCdatyAC(fecha, primeraVez, wb)
     salidasfsp(fecha,wb)
     salidasap(fecha,primeraVez,wb)
