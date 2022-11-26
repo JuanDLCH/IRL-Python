@@ -19,7 +19,7 @@ def creditosAprobados(fecha: Fecha, primeraVez:bool, wb: xw.Book):
     dia = fecha.add_months(1).add_days(-1).dia
     ws.range('B5').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
 
-    ultimaFila = ws.range('A9').end('down').row
+    ultimaFila = ws.range('A8').end('down').row
 
     tabla = pd.read_csv(archivo, skiprows=3, usecols=['CUENTA', 'Saldo'], encoding='ANSI', sep=';')
 
@@ -30,10 +30,10 @@ def creditosAprobados(fecha: Fecha, primeraVez:bool, wb: xw.Book):
         saldo = 0
 
     if primeraVez: 
-        ws.range('A' + str(ultimaFila)).value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
+        ws.range('A' + str(ultimaFila)).value = '{}/{}/{}'.format(dia, mes, fecha.anio)
         ws.range('B' + str(ultimaFila)).value = saldo
     else : 
-        ws.range('A' + str(ultimaFila + 1)).value = '{}/{}/{}'.format(fecha.add_months(1).add_days(-1).dia, mes, fecha.anio)
+        ws.range('A' + str(ultimaFila + 1 )).value = '{}/{}/{}'.format(dia, mes, fecha.anio)
         ws.range('B' + str(ultimaFila + 1)).value = saldo
 
 
