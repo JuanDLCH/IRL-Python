@@ -19,13 +19,13 @@ def salidasao(fecha: Fecha, wb: xw.Book):
     ws = wb.sheets['Salidas De Ahorro ordinario']
     tabla = pd.read_csv(archivo, usecols=['Saldo'], encoding='ANSI', sep=';', skiprows=3)
 
-    ws.range('F4').value = '{}/{}/{}'.format(ultimodia,mes,fecha.anio)
+    ws.range('B5').value = '{}/{}/{}'.format(ultimodia,mes,fecha.anio)
 
     for i in range(1, ultimodia + 1):
         dia = '0' + str(i) if i < 10 else str(i)
         saldo = tabla.get('Saldo')[i-1]
-        ws.range('B' + str(i + 6)).value = saldo  
-        ws.range('A' + str(i + 6)).value = '{}/{}/{}'.format(dia,mes,fecha.anio)
+        ws.range('B' + str(i + 8)).value = saldo  
+        ws.range('A' + str(i + 8)).value = '{}/{}/{}'.format(dia,mes,fecha.anio)
 
 
 

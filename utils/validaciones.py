@@ -150,10 +150,10 @@ def ajustarNombres():
 
 def buscarPlano(mes, anio):
     print('Buscando plano de {} {}. . .'.format(meses[mes - 1], anio))
-    if os.path.exists(rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsm'.format(meses[mes - 1], anio)):
+    if os.path.exists(rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsx'.format(meses[mes - 1], anio)):
         print('Encontrado plano de {} {}. . .'.format(meses[mes - 1], anio))
-        return rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsm'.format(meses[mes - 1], anio)
+        return rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsx'.format(meses[mes - 1], anio)
     else:
-        QMessageBox.warning(None, "RobotIRL", "No se encontró el plano de {} {}, verifique que este en la carpeta PlanosDiligenciados del robot y que se llame ""PLANOIRL MES AÑO.xlsm"", recuerde si no es la primera vez que se ejecuta el robot, necesita el plano del mes anterior".format(meses[mes - 1], anio))
+        QMessageBox.warning(None, "RobotIRL", "No se encontró el plano de {} {}, verifique que este en la carpeta PlanosDiligenciados del robot y que se llame ""PLANOIRL MES AÑO.xlsx"", recuerde si no es la primera vez que se ejecuta el robot, necesita el plano del mes anterior".format(meses[mes - 1], anio))
         os.system('python ui.py')
         exit()

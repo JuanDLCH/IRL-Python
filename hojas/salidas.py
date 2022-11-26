@@ -7,8 +7,9 @@ from xlwings import *
 from utils.globals import rutaRobot
 
 doc = 'INFORME INDIVIDUAL DE LAS CAPTACIONES (MODIFICADO)'
-columnas = ['CodigoContable','NIT', 'Saldo', 'InteresesCausados', 'FechaVencimiento', 'FechaApertura', 'Plazo', 'TasaInteresEfectiva']
+columnas = ['CodigoContable','NIT','FechaApertura','Plazo','FechaVencimiento','TasaInteresEfectiva','InteresesCausados', 'Saldo']
 salidas = ['Salidas de CDAT ', 'Salidas Ahorro Contractual']
+
 
 def salidaCdatyAC(fecha: Fecha, primeraVez, wb: xw.Book):
     cuentas = [[211005, 211010, 211015], [212505, 212510, 212515, 212520]]
@@ -28,9 +29,9 @@ def salidaCdatyAC(fecha: Fecha, primeraVez, wb: xw.Book):
         columnas.remove('CodigoContable')
         tabla = tabla[columnas]
         if not primeraVez:
-            ws.range('A10:G' + str(ws.range('A10').end('down').row)).clear()
+            ws.range('A9:G' + str(ws.range('A9').end('down').row)).clear()
 
-        ws.range('A10').value = tabla.values
+        ws.range('A9').value = tabla.values
         # Poner en primera posicion de la lista columnas CodigoContable
         columnas.insert(0, 'CodigoContable')
 

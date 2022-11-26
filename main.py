@@ -26,6 +26,7 @@ from hojas.salidasfsp import salidasfsp
 from hojas.recaudoyremanentes import recaudoyremanentes
 from hojas.cxp import cxp
 from hojas.salidasp import salidasp
+from hojas.salidasp import salidasp
 carpetas = [
     'CATALOGO DE CUENTAS',
     'CREDITOS DE BANCOS Y OTRAS OBLIGACIONES FINANCIERAS (NUEVO)',
@@ -50,7 +51,7 @@ def main(mes, anio, primeraVez):
     # Iniciar un cronometro
     start_time = datetime.now()  
 
-    path = resource_path('planoirl.xlsm')
+    path = resource_path('planoirl.xlsx')
 
     if primeraVez:
         plano = ExcelFile(path)
@@ -79,9 +80,6 @@ def main(mes, anio, primeraVez):
         
     print('Iniciando sesion. . .')
     planoInvisible = wb.macro('Visibility.makeInvisible') 
-    planoVisible = wb.macro('Visibility.makeVisible')
-
-    #planoInvisible()
 
     #To do: Diligenciar carteras
     diligenciarCarteras(wb, fecha)
@@ -94,27 +92,27 @@ def main(mes, anio, primeraVez):
     cxc(fecha, primeraVez, wb)
     cxp(fecha,wb) 
     recaudoyremanentes(fecha,wb)
+    cxp(fecha,wb) 
+    recaudoyremanentes(fecha,wb)
     obligacionesFinancieras(fecha, primeraVez, wb)
-    creditosAprobados(fecha, wb)
+    creditosAprobados(fecha,primeraVez, wb)
     gastosAdministrativos(fecha, primeraVez, wb)
     salidaCdatyAC(fecha, primeraVez, wb)
+    salidaCdatyAC(fecha, primeraVez, wb)
     salidasfsp(fecha,wb)
-    salidasap(fecha,wb)
+    salidasap(fecha,primeraVez,wb)
     salidasao(fecha,wb)
-    salidasp(fecha,wb)
+    salidasp(fecha,primeraVez,wb)
   
     
     wb.api.RefreshAll()
     print('Guardando plano. . .')
     try:
-        wb.save(rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsm'.format(mes, anio))
+        wb.save(rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsx'.format(mes, anio))
     except:
         print('Error al guardar el plano, es posible que ya haya un plano con este nombre abierto, por favor cierrelo.')
     # Terminar el cronometro
     end_time = datetime.now()
     print('Tiempo de ejecucion: {}'.format(end_time - start_time))
 
-    wb = xw.Book(rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsm'.format(mes, anio))
-    planoVisible = wb.macro('Visibility.makeVisible')
-
-    planoVisible()
+    wb = xw.Book(rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsx'.format(mes, anio))

@@ -17,7 +17,7 @@ def obligacionesFinancieras(fecha: Fecha, primeraVez: bool, wb: xw.Book):
     ws = wb.sheets[hoja]
     print('Diligenciando {}. . .'.format(hoja))
 
-    ws.range('B4').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
+    ws.range('B5').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
 
     archivos = os.listdir(rutaRobot + '/Archivos/' + doc)
     archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
