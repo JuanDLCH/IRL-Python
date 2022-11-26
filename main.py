@@ -117,4 +117,4 @@ def main(mes, anio, primeraVez):
     wb = xw.Book(rutaRobot + '/PlanosDiligenciados/PLANOIRL {} {}.xlsx'.format(mes, anio))
     #planoVisible = wb.macro('Visibility.makeVisible')
 
-    #planoVisible()
+    #planoVisible().
