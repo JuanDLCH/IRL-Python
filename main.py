@@ -57,6 +57,7 @@ def main(mes, anio, primeraVez):
         plano = ExcelFile(path)
     else:
         mesPlano = meses.index(mes.upper())
+        print(mesPlano)
         plano = ExcelFile(buscarPlano(mesPlano, anio))
 
     fecha = Fecha(1, meses.index(mes.upper()) + 1, anio)
@@ -64,7 +65,7 @@ def main(mes, anio, primeraVez):
     validarCarpetas()
     clasificarArchivos()
     validarArchivos(primeraVez, fecha)
-    desviacion = desviacionEstandar(fecha.as_datetime())
+    #desviacion = desviacionEstandar(fecha.as_datetime())
 
     # Abrir el plano
     print('Abriendo plano. . .')
@@ -78,8 +79,8 @@ def main(mes, anio, primeraVez):
         os.system('python ui.py')
         exit()
         
-    print('Iniciando sesion. . .')
-    planoInvisible = wb.macro('Visibility.makeInvisible') 
+    #print('Iniciando sesion. . .')
+    #planoInvisible = wb.macro('Visibility.makeInvisible') 
 
     #To do: Diligenciar carteras
     diligenciarCarteras(wb, fecha)

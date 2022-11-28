@@ -48,7 +48,7 @@ class Ui(QtWidgets.QDialog):
             self.lblError.setStyleSheet("color: red; font-weight: bold;")
             self.lblError.setAlignment(QtCore.Qt.AlignCenter)
         elif datetime(anio, meses.index(mes) + 1, 1) > datetime.now():
-            self.lblError.setText('Eres vidente o algo asi bro?')
+            self.lblError.setText('Año mayor al actual')
             self.lblError.setStyleSheet("color: red; font-weight: bold;")
             self.lblError.setAlignment(QtCore.Qt.AlignCenter)
         else:

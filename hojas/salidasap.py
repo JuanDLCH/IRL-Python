@@ -6,7 +6,7 @@ import os
 from utils.globals import rutaRobot
 doc = 'INFORME INDIVIDUAL DE LAS CAPTACIONES (MODIFICADO)'
 hoja = 'salida de ahorro permanente'
-cuentas = [213005, 213010, 213015, 213020]
+cuentas = [213005,213010, 213015, 213020]
 
 
 def salidasap(fecha: Fecha, primeraVez: bool, wb: xw.Book):
@@ -17,7 +17,7 @@ def salidasap(fecha: Fecha, primeraVez: bool, wb: xw.Book):
     archivos = os.listdir('{}/Archivos/{}'.format(rutaRobot,doc))
     print('Diligenciando Salidas de ahorro permanente. . .')
     if primeraVez:
-
+            
         fechaAux = fecha.add_months(-12)
         for i in range(13):
             dia = fechaAux.add_months(1).add_days(-1).dia
@@ -27,14 +27,15 @@ def salidasap(fecha: Fecha, primeraVez: bool, wb: xw.Book):
             archivo = os.path.join('{}/Archivos/{}'.format(rutaRobot,doc), archivo)
             
             tabla = pd.read_csv(archivo, usecols=['CodigoContable','NIT','Saldo'], encoding='ANSI', sep=';', skiprows=3)
-          
+            tabla = tabla.loc[tabla['CodigoContable'].isin(cuentas)]
             if tabla['CodigoContable'].isin([cuentas]).any():
                 tablaAux = tabla.drop(columns='Saldo')
 
                 fechasmespasado = fechaAux.add_months(-1)
                 archivo = [archivo for archivo in archivos if fechasmespasado.as_Text() in archivo][0]
                 archivo = os.path.join('{}/Archivos/{}'.format(rutaRobot,doc), archivo)
-                tablaP = pd.read_csv(archivo, usecols=['NIT','Saldo'], encoding='ANSI', sep=';', skiprows=3)
+                tablaP = pd.read_csv(archivo, usecols=['CodigoContable','NIT','Saldo'], encoding='ANSI', sep=';', skiprows=3)
+                tablaP = tabla.loc[tabla['CodigoContable'].isin(cuentas)]
                 tablaAuxP = tablaP.drop(columns='Saldo')
 
                 resultado1 = tablaAuxP[~tablaAuxP.apply(tuple,1).isin(tablaAux.apply(tuple,1))]
@@ -61,7 +62,7 @@ def salidasap(fecha: Fecha, primeraVez: bool, wb: xw.Book):
         archivo = [archivo for archivo in archivos if fecha.as_Text() in archivo][0]
         archivo = os.path.join('{}/Archivos/{}'.format(rutaRobot,doc), archivo)
         tabla = pd.read_csv(archivo, usecols=['CodigoContable','NIT','Saldo'], encoding='ANSI', sep=';', skiprows=3)
-
+        tabla = tabla.loc[tabla['CodigoContable'].isin(cuentas)]
         if tabla['CodigoContable'].isin([cuentas]).any():
             mes = '0' + str(fecha.mes) if fecha.mes < 10 else str(fecha.mes)
             dia = fecha.add_months(1).add_days(-1).dia
@@ -75,7 +76,7 @@ def salidasap(fecha: Fecha, primeraVez: bool, wb: xw.Book):
             archivo = os.path.join(rutaRobot + '/Archivos/' + doc, archivo)
             
             
-            tabla = pd.read_csv(archivo, usecols=['NIT','Saldo'], encoding='ANSI', sep=';', skiprows=3)
+            tabla = pd.read_csv(archivo, usecols=['CodigoContable','NIT','Saldo'], encoding='ANSI', sep=';', skiprows=3)
             tablaAux = tabla.drop(columns='Saldo')
         
             fechasmespasado = fecha.add_months(-1)

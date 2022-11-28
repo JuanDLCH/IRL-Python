@@ -21,7 +21,7 @@ def recaudoyremanentes(fecha: Fecha, wb: xw.Book):
     dia = fecha.add_months(1).add_days(-1).dia
 
     ws.range('A9').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
-    #ws.range('B6:C' + str(ws.range('B6').end('down').row)).clear()
+    ws.range('B5').value = '{}/{}/{}'.format(dia, mes, fecha.anio)
     
     tabla = pd.read_csv(archivo, usecols=['CUENTA','Saldo'], encoding='ANSI', sep=';', skiprows=3)
     saldo1 = tabla[tabla['CUENTA'] == 246000]['Saldo'].sum()
