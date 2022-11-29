@@ -28,7 +28,7 @@ archivosSegundaVez = [1 , 1, 1 , 2 , 1 , 2, 1, 1]
 
 def crearCarpetas():
     # Ignorar errores de certificado
-    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    #urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     os.mkdir(rutaRobot)
     os.mkdir(rutaRobot + '/' + 'Archivos')
     for i in carpetas:
@@ -36,10 +36,10 @@ def crearCarpetas():
     os.mkdir(rutaRobot + '/' + 'PlanosDiligenciados')
     os.mkdir(rutaRobot + '/' + 'ArchivosNuevos')
     found = False
-    url = 'https://www.supersolidaria.gov.co/sites/default/files/public/data/desviacion_estandar_'
+    #url = 'https://www.supersolidaria.gov.co/sites/default/files/public/data/desviacion_estandar_'
     fechaActual = Fecha(1, datetime.now().month, datetime.now().year)
     fechaActual = fechaActual.add_months(-2)
-    print("Buscando la desviación estándar más reciente. . .")
+    """print("Buscando la desviación estándar más reciente. . .")
     while not found:
         try:
             if os.path.exists(rutaRobot + '/Desviacion-estandar ' + fechaActual.as_Text().lower() + '.xlsx'):
@@ -56,7 +56,7 @@ def crearCarpetas():
         except Exception as e:
             #Mostrar el error
             print(e)
-        fechaActual = fechaActual.add_months(-1)
+        fechaActual = fechaActual.add_months(-1)"""
 
 def validarCarpetas():
     print('Validando carpetas. . .')
